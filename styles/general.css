@@ -1,0 +1,45 @@
+/* GENERAL STYLES */
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* VARIABLES */
+:root{
+    --primary-color: #E15757;
+    --primary-color-light: #F8EDF6;
+    --secondary-color-light: #E6EEF9;
+
+    --page-padding: 10%
+}
+
+/* MAIN BACKGROUND */
+body{
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top right, var(--primary-color-light) 50%, var(--secondary-color-light));
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* FONTS */
+h1{
+    padding-top: var(--page-padding);
+    font-size: 24px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+}
+h2{
+    font-size: 20px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+}
+
+
+section{
+    padding: 10%;
+}
