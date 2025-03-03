@@ -1,8 +1,8 @@
 // Imports
-import { requestLogin } from './rest.js';
+import { login } from './auth.js';
 
 // HTML elements
-const login = document.getElementById('login');
+const login_ = document.getElementById('login');
 const password = document.getElementById('password');
 const submit = document.getElementById('submit');
 
@@ -14,7 +14,7 @@ submit.addEventListener('click', async () => {
     const redirect = urlParams.get('redirect');
 
     // Tries to connect
-    const error = await requestLogin(login.value, password.value, redirect);
+    const error = await login(login_.value, password.value, redirect);
 
     // Show error message
     alert(error);

@@ -16,16 +16,32 @@
 </head>
 <body>
 
-    <h1>Easly</h1>
-    <h2>Connection</h2>
+    <section class="top">
+        <h1>Easly</h1>
+        <h2>Connection</h2>
+    </section>
 
-    <label for="login">Identifiant</label>
-    <input type="text" name="login" id="login">
+    <section class="form">
 
-    <label for="password">Mot de passe</label>
-    <input type="password" name="password" id="password">
+        <div class="elm">
+            <label for="login">Identifiant</label>
+            <input type="text" name="login" id="login">
+        </div>
+    
+        <div class="elm">
+            <label for="password">Mot de passe</label>
+            <input type="password" name="password" id="password">
+        </div>
+    
+        <button class="elm btn-red" id="submit">Se connecter</button>
 
-    <button id="submit">Se connecter</button>
+    </section>
+
+    <section class="create">
+
+        <a href="/create-organisation">Créer une organisation</a>
+
+    </section>
     
     <!-- SCRIPTS -->
     <script type="module" src="scripts/dsvg.js"></script>

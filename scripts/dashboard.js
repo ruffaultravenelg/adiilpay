@@ -1,5 +1,5 @@
 // Imports
 import { GET } from './rest.js';
 
-const users = GET('/user');
+const users = await GET('/user');
 console.log(users);
