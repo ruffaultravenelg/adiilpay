@@ -28,6 +28,9 @@
 }
 
 /* MAIN BACKGROUND */
+html{
+    width: 100vw;
+}
 body{
     width: 100%;
     min-height: 100vh;
@@ -135,7 +138,7 @@ input:focus, button:focus, textarea:focus {
 
 /* INPUT */
 input, textarea{
-    padding: 10px;
+    padding: 15px;
     font-size: 1rem;
     border-radius: 10px;
     background-color: white;
