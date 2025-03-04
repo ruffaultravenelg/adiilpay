@@ -52,3 +52,11 @@ export function logout(){
     localStorage.removeItem('bearerToken');
     window.location.href = '/login';
 }
+
+/**
+ * Check if the user is connected.
+ * @returns {boolean} True if the user is connected, false otherwise.
+ */
+export function isConnected(){
+    return localStorage.getItem('bearerToken') !== null;
+}

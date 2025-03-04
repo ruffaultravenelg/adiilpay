@@ -1,5 +1,5 @@
 // Imports
-import { login } from './auth.js';
+import { isConnected, login } from './auth.js';
 import { showLoader, hideLoader } from './loader.js';
 
 // HTML elements
@@ -50,3 +50,7 @@ password_input.addEventListener('keyup', (event)=>{
     if (event.key === 'Enter' && password_input.value.length > 0)
         submit.click();
 })
+
+// Check if connected
+if (isConnected())
+    window.location.href = '/dashboard.html';
