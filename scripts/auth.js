@@ -32,7 +32,7 @@ export async function login(login, password, redirectPath = '/dashboard.html'){
 
     // Return error message if failed
     if (!response.ok)
-        return (await response.json()).error;
+        throw new Error((await response.json()).error);
 
     // Save bearer token
     const { token } = await response.json();
@@ -42,7 +42,7 @@ export async function login(login, password, redirectPath = '/dashboard.html'){
     window.location.href = redirectPath;
 
     // Stop all scripts to wait for the page href to change
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => {});
 }
 
 /**

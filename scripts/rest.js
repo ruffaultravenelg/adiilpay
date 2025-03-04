@@ -28,14 +28,21 @@ async function call(method, endpoint, data){
         body: JSON.stringify(data)
     });
 
-    // Throw error if failed
-    if (!response.ok){
-        const error = await response.json();
-        throw new Error(error.error);
+    // If the response is ok, return it
+    if (response.ok)
+        return await response.json();
+
+    // Get the message
+    const error = await response.json();
+    
+    // Invalid token / expired session
+    if (response.status === 498){
+        window.location.href = '/login?redirect=' + encodeURIComponent(window.location.pathname);
+        throw new Error('Invalid token');
     }
 
-    // Return JSON
-    return await response.json();
+    // Throw an error with the message
+    throw new Error(error.message);
 
 }
 

@@ -1,17 +1,61 @@
 /* SECTION PLACEMENT */
-body{
+section.content{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     height: 100vh;
 }
 
 /* FORM */
 section.form {
     width: 100%;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 25px;
+    gap: 30px;
+    padding: 0 var(--page-padding);
+}
+section.form .elm{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+section.form .elm label{
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+}
+section.form .elm > *{
+    width: 100%;
+    text-align: center;
+}
+section.form label{
+    transition-duration: 0.2s;
+    color: black;
+}
+section.form label.error{
+    color: var(--error-color);
+}
+#error_message{
+    width: 100%;
+    text-align: center;
+    color: var(--error-color);
+    font-size: 0.8em;
+}
+
+/* BOTTOM LINKS */
+section.create{
+    padding: var(--page-padding);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+section.create a{
+    color: var(--primary-color);
+    font-size: 0.9em;
+    font-weight: normal;
 }
