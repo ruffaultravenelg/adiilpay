@@ -1,0 +1,94 @@
+section.content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: var(--page-padding);
+}
+section.top{
+    padding: 0;
+}
+
+/* GRAPH */
+section.graph-container{
+    width: 100%;
+    max-width: 500px;
+}
+.graph{
+    width: 100%;
+    padding: 20px 0 0 0;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 23.3px -10px rgba(0, 0, 0, 0.25);
+}
+.graph-title{
+    font-size: 1em;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.columns{
+    --height: 150;
+    height: calc(var(--height) * 1px);
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 10px;
+    overflow-y: auto;
+    padding-bottom: 20px;
+}
+.columns .column{
+    width: 40px;
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+.columns .column .label{
+    margin-top: 10px;
+    font-size: 0.8em;
+}
+.columns .column .col{
+    width: 15px;
+    height: calc(calc(var(--val) * var(--height) / 100) * 1px);
+    background-color: var(--primary-color);
+    border-radius: 3px;
+}
+
+/* CARDS */
+.btns{
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 80px;
+}
+.btns > *{
+    width: 100%;
+}
+
+.card-pass{
+    position: fixed;
+    bottom: 0;
+    left: var(--page-padding);
+    right: var(--page-padding);
+    background-color: var(--primary-color);
+    height: 60px;
+    border-radius: 25px 25px 0 0;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.card-pass p{
+    color: white;
+    font-size: 1rem;
+}
+.card-pass img{
+    height: 25px;
+}

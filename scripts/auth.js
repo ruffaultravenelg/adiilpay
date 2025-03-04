@@ -35,8 +35,16 @@ export async function login(login, password, redirectPath = '/dashboard.html'){
         throw new Error((await response.json()).error);
 
     // Save bearer token
-    const { token } = await response.json();
+    const { token, userID } = await response.json();
     localStorage.setItem('bearerToken', token);
+    /*
+    // Save user id
+    localStorage.setItem('userid', userID);
+
+    // Save user informations
+    const { name, surname } = await GET(`/user/${userID}`);
+    localStorage.setItem('firstname', firstname);
+    localStorage.setItem('lastname', lastname); */
 
     // Redirect to the path
     window.location.href = redirectPath;

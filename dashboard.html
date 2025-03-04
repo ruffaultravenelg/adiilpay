@@ -10,15 +10,75 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="styles/general.css">
     <link rel="stylesheet" href="styles/dashboard.css">
 
 </head>
 <body>
 
-    
+    <section class="content">
+
+        <section class="top">
+            <h1>Easly</h1>
+            <h2>Gémino Ruffault--Ravenel</h2>
+        </section>
+
+        <section class="graph-container">
+            <div class="graph">
+                <p class="graph-title">Transactions globales</p>
+                <div class="columns" id="graph_columns">
+                    <!-- AUTO COMPLETED -->
+                </div>
+            </div>
+        </section>
+
+        <section class="btns">
+
+            <button class="btn-white">
+                <div>
+                    <span class="material-symbols-outlined">history</span>
+                </div>
+                Dernières transactions
+                <span class="material-symbols-outlined">arrow_forward_ios</span>
+            </button>
+
+            <button class="btn-white">
+                <div>
+                    <span class="material-symbols-outlined">group</span>
+                </div>
+                Voir tous les comptes
+                <span class="material-symbols-outlined">arrow_forward_ios</span>
+            </button>
+
+            <button class="btn-white">
+                <div>
+                    <span class="material-symbols-outlined">shield_person</span>
+                </div>
+                Gerer les administrateurs
+                <span class="material-symbols-outlined">arrow_forward_ios</span>
+            </button>
+
+            <button class="btn-white">
+                <div>
+                    <span class="material-symbols-outlined">edit</span>
+                </div>
+                Modifier mon compte
+                <span class="material-symbols-outlined">arrow_forward_ios</span>
+            </button>
+
+        </section>
+
+        <div class="card-pass">
+            <img src="./ressources/icons/pass.png" alt="Carte sans contact">
+            <p>Placer une  carte</p>
+        </div>
+
+    </section>
+
     <!-- SCRIPTS -->
     <script type="module" src="scripts/dsvg.js"></script>
+    <script type="module" src="scripts/organisation.js"></script>
     <script type="module" src="scripts/dashboard.js"></script>
 
 </body>
