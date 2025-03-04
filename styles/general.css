@@ -108,30 +108,38 @@ input:focus, button:focus, textarea:focus {
     padding: 10px;
     border-radius: 15px;
     border: 3px solid transparent;
-}
-.btn-white > div{
-    width: 45px;
-    height: 45px;
-    background-color: var(--primary-color-lighter);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 10px;
-}
-.btn-white > div > span{
-    color: var(--primary-color);
-    font-size: 1.4rem;
+    cursor: pointer;
 }
 .btn-white > span{
-    font-size: 1rem;
+    margin-right: 10px;
     color: var(--primary-color);
-    position: absolute;
-    right: 30px;
+    background-color: var(--primary-color-lighter);
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.btn-white > span.icon{
+    font-size: 1.5em;
+    min-width: 50px;
+    min-height: 50px;
+    font-family: 'Material Symbols Outlined';
 }
 .btn-white:hover, .btn-white:focus{
     border: 3px solid var(--primary-color)
 }
+.btn-white::after {
+    content: "arrow_forward_ios";
+    font-family: 'Material Symbols Outlined';
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1rem;
+    color: var(--primary-color);
+    position: absolute;
+    right: 20px;
+}
+
 
 /* INPUT */
 input, textarea{

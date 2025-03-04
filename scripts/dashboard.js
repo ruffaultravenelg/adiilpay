@@ -35,6 +35,3 @@ GET('/transactions/statistics').then(graph => {
     graph_columns.scrollLeft = graph_columns.scrollWidth;
 
 });
-
-const users = await GET('/user');
-console.log(users);

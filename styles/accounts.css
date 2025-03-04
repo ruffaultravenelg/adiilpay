@@ -1,3 +1,4 @@
+/* SEARCH AREA */
 .search-container{
     width: 100%;
     padding: 0 var(--page-padding);
@@ -10,4 +11,22 @@
     width: 100%;
     max-width: 500px;
     text-align: center;
+}
+
+/* REULSTS - Account list */
+#results{
+    width: 100%;
+    height: 100%;
+    --bar: calc(var(--page-padding) / 2);
+    padding: var(--bar) var(--page-padding) var(--page-padding) var(--page-padding);
+    margin-top: var(--bar);
+    border-top: 1px solid #B7B7B7;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+#results > *{
+    width: 100%;
+    max-width: 500px;
 }
