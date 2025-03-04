@@ -1,9 +1,10 @@
 section.content{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     padding: var(--page-padding);
+    gap: var(--page-padding);
 }
 section.top{
     padding: 0;
@@ -91,4 +92,13 @@ section.graph-container{
 }
 .card-pass img{
     height: 25px;
+}
+
+@media (min-width: 768px) {
+    .card-pass {
+        display: none;
+    }
+    .btns{
+        padding-bottom: 0;
+    }
 }
