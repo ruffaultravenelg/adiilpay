@@ -17,9 +17,9 @@ if (!id)
 // Load card data
 let userData;
 try {
-    userData = await GET(`/user/${id}`);
+    userData = await GET(`/user/${id}`, false);
 } catch (err) {
-    window.location.href = '/user404';
+//    window.location.href = '/user404';
 }
 
 // Display user data

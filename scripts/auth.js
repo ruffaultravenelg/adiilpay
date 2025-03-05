@@ -1,4 +1,5 @@
-const API_URL = 'https://api.adiilpay.com/v1'
+// Imports
+import { POST } from './rest.js';
 
 /**
  * Try to get the bearer token from local storage. If it doesn't exist, redirect to the login page.
@@ -18,24 +19,8 @@ export function getBearerToken(){
  */
 export async function login(login, password, redirectPath = '/dashboard.html'){
 
-    // Fetch API
-    const response = await fetch(`${API_URL}/login`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            login: login,
-            password: password
-        })
-    });
-
-    // Return error message if failed
-    if (!response.ok)
-        throw new Error((await response.json()).error);
-
     // Save bearer token
-    const { token, userID } = await response.json();
+    const { token, userID } = await POST(`/login`, { login, password }, false);
     localStorage.setItem('bearerToken', token);
     /*
     // Save user id

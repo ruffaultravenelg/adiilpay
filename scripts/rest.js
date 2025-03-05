@@ -13,10 +13,10 @@ const API_URL = 'https://api.adiilpay.com/v1'
  * @returns {Promise<Object>} A promise that resolves to the JSON response from the server.
  * @throws {Error} Throws an error if the request fails.
  */
-async function call(method, endpoint, data){
+async function call(method, endpoint, data, bearer = true) {
 
     // Get bearer token
-    const bearerToken = getBearerToken();
+    const bearerToken = bearer ? getBearerToken() : '';
 
     // Fetch API
     const response = await fetch(API_URL + endpoint, {
@@ -49,8 +49,19 @@ async function call(method, endpoint, data){
 /**
  * Performs a GET request to the specified endpoint.
  * @param {string} endpoint 
+ * @param {boolean} auth 
  * @returns 
  */
-export async function GET(endpoint){
-    return call('GET', endpoint);
+export async function GET(endpoint, auth = true) {
+    return call('GET', endpoint, undefined, auth);
+}
+
+/**
+ * Performs a POST request to the specified endpoint.
+ * @param {string} endpoint 
+ * @param {Object} data 
+ * @returns 
+ */
+export async function POST(endpoint, data, auth = true) {
+    return call('POST', endpoint, data, auth);
 }
