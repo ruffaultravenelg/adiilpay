@@ -17,6 +17,7 @@ section.content{
     align-items: center;
     justify-content: flex-start;
     gap: 15px;
+    box-shadow: var(--shadow);
 }
 
 .error > span{

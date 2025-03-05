@@ -28,13 +28,13 @@
     top: -25px;
     left: 30px;
     background: rgba(255, 255, 255, 0.06);
-    animation: card-light ease-out 5s infinite;
+    animation: card-light ease-out 3s infinite;
 }
 @keyframes card-light{
     0%{
         left: -100%;
     }
-    40%{
+    70%{
         left: 120%;
     }
     100%{
