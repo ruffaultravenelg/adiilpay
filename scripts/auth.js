@@ -20,16 +20,19 @@ export function getBearerToken(){
 export async function login(login, password, redirectPath){
 
     // Save bearer token
-    const { token, userID } = await POST(`/login`, { login, password }, false);
+    const { token, id, organization } = await POST(`/login`, { login, password }, false);
     localStorage.setItem('bearerToken', token);
-    /*
-    // Save user id
-    localStorage.setItem('userid', userID);
+    
+    //TODO: Remove in prod
+    organization.primary_color = '';
+    organization.secondary_color = '';
 
-    // Save user informations
-    const { name, surname } = await GET(`/user/${userID}`);
-    localStorage.setItem('firstname', firstname);
-    localStorage.setItem('lastname', lastname); */
+    // Save user id
+    localStorage.setItem('id', id);
+    localStorage.setItem('org_id', organization.id);
+    localStorage.setItem('org_name', organization.name ? organization.name : 'Organisation');
+    localStorage.setItem('org_primary', organization.primary_color ? organization.primary_color : '');
+    localStorage.setItem('org_secondary', organization.secondary_color ? organization.secondary_color : '');
 
     // Redirect to the path
     window.location.href = redirectPath ? redirectPath : '/dashboard.html';

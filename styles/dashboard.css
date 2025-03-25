@@ -37,7 +37,7 @@ section.graph-container{
     justify-content: flex-end;
     align-items: flex-end;
     gap: 10px;
-    overflow-y: auto;
+    overflow-x: auto;
     padding-bottom: 20px;
 }
 .columns .column{
