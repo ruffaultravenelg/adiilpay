@@ -1,0 +1,65 @@
+/* MODALS */
+.modals{
+    width: 100%;
+    padding: var(--page-padding);
+}
+@keyframes modal_in {
+    from{
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.modals .showed{
+    animation: modal_in 0.8s ease forwards;
+    z-index: 1;
+}
+
+/* NO NFC */
+#update_nonfc_modal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px;
+    text-align: center;
+
+
+    opacity: 0;
+    z-index: -1;
+
+    background-color: white;
+    border-radius: 20px;
+}
+#update_nonfc_modal .title{
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+#update_nonfc_modal .text{
+    font-size: 1rem;
+    color: black;
+}
+#update_nonfc_modal .url{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 15px 15px 30px;
+    background-color: #EEE;
+    border-radius: 5px;
+    max-width: 100%;
+    overflow-x: auto;
+}
+#update_nonfc_modal .url p{
+    font-family: 'Consolas', monospace;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+#update_nonfc_modal .url button{
+    font-size: 0.7rem;
+}

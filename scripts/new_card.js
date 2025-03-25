@@ -1,7 +1,10 @@
 // Imports
+import { POST } from './rest.js';
 import { explodeLabel } from "./labelSplitter.js";
+import { showLoader, hideLoader } from "./loader.js";
+import { isNFCSupported } from "./nfc.js";
 
-
+// NFC stuff
 async function saveToNFC(url) {
     if (!('NDEFReader' in window)) {
         console.error("Web NFC n'est pas supporté par ce navigateur.");
@@ -32,7 +35,34 @@ label_input.onkeyup = () => {
     card_lastname.innerText = lastname;
 }
 
+// Modals
+const creation_modal = document.getElementById('creation_modal');
+const update_nonfc_modal = document.getElementById('update_nonfc_modal');
+
 // On click
 document.getElementById('create_btn').addEventListener('click', async () => {
+
+    // Check if label isn't empty
+    if (!label_input.value)
+        return;
+
+    // Get label
+    const label = label_input.value;
+
+    // Do post request
+    showLoader();
+    //const { id } = await POST('card', { label });
+    const id = 'ijfeosifjeio';
+    hideLoader();
+
+    // Hide creation window
+    creation_modal.classList.remove('showed');
+
+    // Is NFC available ?
+    if (isNFCSupported()) {
+        alert('huh');
+    } else {
+        update_nonfc_modal.classList.add('showed');
+    }
 
 });

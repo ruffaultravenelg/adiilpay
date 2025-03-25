@@ -85,11 +85,13 @@ input:focus, button:focus, textarea:focus {
 }
 
 /* BUTTON */
+.icon{
+    font-family: 'Material Symbols Outlined';
+}
 .btn-white > span.icon, .btn-red > span.icon{
     font-size: 1.5em;
     min-width: 50px;
     min-height: 50px;
-    font-family: 'Material Symbols Outlined';
 }
 .btn-white, .btn-red{
     display: flex;
@@ -114,6 +116,12 @@ input:focus, button:focus, textarea:focus {
     margin-right: 10px;
     min-height: 0 !important;
     min-width: 0 !important;
+}
+.btn-red.only-icon{
+    padding: 15px;
+}
+.btn-red.only-icon > span{
+    margin: 0;
 }
 
 .btn-white{

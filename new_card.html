@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="styles/general.css">
     <link rel="stylesheet" href="styles/card.css">
     <link rel="stylesheet" href="styles/card_div.css">
+    <link rel="stylesheet" href="styles/new_card.css">
 
 </head>
 <body>
@@ -21,7 +22,7 @@
             <h1>Créer une carte</h1>
         </section>
 
-        <section class="actions showed">
+        <section class="actions showed" id="creation_modal">
 
             <div class="card">
   
@@ -42,7 +43,7 @@
 
             <div class="btns">
 
-                <p style="text-align: center;">Label</p>
+                <p style="text-align: center; font-size: 1rem;">Label</p>
                 <input type="text" id="label_input" style="text-align: center;" placeholder="NOM Prénom">
 
                 <button id="create_btn" class="btn-red">
@@ -54,9 +55,25 @@
 
         </section>
 
-        <section class="place-card">
-            
+        <section class="modals">
+            <section id="update_nonfc_modal">
+                <p class="title">NFC non supporté</p>
+                <p class="text">Modifier le contenu de la carte NFC manuellement pour y mettre l'adresse suivante :</p>
+
+                <div class="url">
+                    <p>https://adiilpay.com/cards?id=1868607292297505154</p>
+                    <button class="btn-red only-icon">
+                        <span class="icon">content_copy</span>
+                    </button>
+                </div>
+
+                <button class="btn-red" onclick="window.location.href = '/dashboard'">
+                    <span class="icon">home</span>
+                    Retour au dashboard
+                </button>
+            </section>
         </section>
+        
 
     </section>
 
