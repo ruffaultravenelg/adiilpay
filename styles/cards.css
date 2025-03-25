@@ -31,29 +31,9 @@
     max-width: 500px;
 }
 
-/* NEW ACCOUNT */
-#new_account{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-
+/* NEW CARD */
+#new_card{
     position: fixed;
     bottom: var(--page-padding);
     right: var(--page-padding);
-
-    transition-duration: 0.2s;
-    border: 3px solid transparent;
-    cursor: pointer;
-}
-#new_account > span{
-    color: var(--primary-color);
-    font-size: 2rem;
-}
-#new_account:hover{
-    border: 3px solid var(--primary-color);
 }

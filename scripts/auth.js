@@ -17,7 +17,7 @@ export function getBearerToken(){
  * @param {string} login
  * @param {string} password 
  */
-export async function login(login, password, redirectPath = '/dashboard.html'){
+export async function login(login, password, redirectPath){
 
     // Save bearer token
     const { token, userID } = await POST(`/login`, { login, password }, false);
@@ -32,7 +32,7 @@ export async function login(login, password, redirectPath = '/dashboard.html'){
     localStorage.setItem('lastname', lastname); */
 
     // Redirect to the path
-    window.location.href = redirectPath;
+    window.location.href = redirectPath ? redirectPath : '/dashboard.html';
 
     // Stop all scripts to wait for the page href to change
     await new Promise(resolve => {});

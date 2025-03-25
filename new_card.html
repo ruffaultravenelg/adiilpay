@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Easly</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/card.css">
+    <link rel="stylesheet" href="styles/card_div.css">
+
+</head>
+<body>
+
+    <section class="content">
+
+        <section class="top">
+            <h1>Easly</h1>
+            <h2>Créer une carte</h2>
+        </section>
+
+        <section class="actions showed">
+
+            <div class="card">
+  
+                <div class="card-names">
+                    <p id="card_lastname">LABEL</p>
+                    <p id="card_firstname">LABEL</p>
+                </div>
+    
+                <p class="card-sold" id="card_sold">0.00€</p>
+    
+                <p class="card-id" id="card_id">1868607292297505154</p>
+    
+                <p class="card-orga" id="card_orga">ADIIL PAY</p>
+    
+            </div>
+
+            <div class="card-spacer"></div>
+
+            <div class="btns">
+
+                <p style="text-align: center;">Label</p>
+                <input type="text" id="label_input" style="text-align: center;" placeholder="NOM Prénom">
+
+                <button id="create_btn" class="btn-red">
+                    <span class="icon">save</span>
+                    Sauvegarder
+                </button>
+
+            </div>
+
+        </section>
+
+        <section class="place-card">
+            
+        </section>
+
+    </section>
+
+    <!-- BACK BUTTON -->
+    <button onclick="history.back();" id="back" class="btn-white no-arrow only-icon">
+        <span class="icon">arrow_back</span>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script type="module" src="scripts/new_card.js"></script>
+
+</body>
+</html>

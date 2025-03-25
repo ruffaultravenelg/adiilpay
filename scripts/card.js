@@ -1,5 +1,6 @@
 // Imports
 import { GET } from './rest.js';
+import { explodeLabel } from './labelSplitter.js';
 
 // HTML Elements
 const card_firstname = document.getElementById('card_firstname');
@@ -12,21 +13,22 @@ const card_orga = document.getElementById('card_orga');
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 if (!id)
-    window.location.href = '/user404';
+    window.location.href = '/card404';
 
 // Load card data
 let userData;
 try {
-    userData = await GET(`/user/${id}`, false);
+    userData = await GET(`/cards/${id}`, false);
 } catch (err) {
-//    window.location.href = '/user404';
+    //window.location.href = '/card404';
 }
 
-// Display user data
-console.log(userData);
+// Split label
+const { firstname, lastname } = explodeLabel(userData.label);
 
-card_firstname.innerText = userData.name;
-card_lastname.innerText = userData.surname;
+// Set card data
+card_firstname.innerText = firstname;
+card_lastname.innerText = lastname;
 card_sold.innerText = `${userData.balance}€`;
 card_id.innerText = userData.id.substring(0, 15);
 card_orga.innerText = 'adiil pay'

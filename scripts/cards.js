@@ -11,10 +11,10 @@ search_input.addEventListener('input', updateSearchResult);
 
 // Fetch data
 showLoader();
-const users = await GET('/user');
+//const cards = await GET('/cards');
 hideLoader();
 
-updateSearchResult();
+//updateSearchResult();
 
 // Update search results
 function updateSearchResult(){
@@ -26,22 +26,27 @@ function updateSearchResult(){
     const search_term = search_input.value.toLowerCase();
 
     // Filter users
-    const filtered_users = users.filter(user => (user.name + ' ' + user.surname).toLowerCase().includes(search_term));
+    const filtered_cards = cards.filter(card => (card.id + ' ' + card.date + ' ' + card.label).toLowerCase().includes(search_term));
 
     // Display results
-    filtered_users.forEach(user => {
+    filtered_cards.forEach(card => {
         
         // Create user element
-        const user_element = document.createElement('button');
-        user_element.classList.add('btn-white')
-        user_element.innerHTML = `<span>${user.surname}</span> ${user.name}`;
-        results.appendChild(user_element);
+        const card_element = document.createElement('button');
+        card_element.classList.add('btn-white')
+        card_element.innerHTML = `<span>${card.date}</span> ${card.label}`;
+        results.appendChild(card_element);
 
         // Add event listener
-        user_element.addEventListener('click', () => {
-            window.location.href = `/account?id=${user.id}`;
+        card_element.addEventListener('click', () => {
+            window.location.href = `/card?id=${card.id}`;
         });
 
     });
 
 }
+
+// New card
+document.getElementById('new_card').addEventListener('click', () => {
+    window.location.href = '/new_card';
+});

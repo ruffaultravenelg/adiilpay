@@ -34,6 +34,7 @@ body{
     width: 100%;
     min-height: 100vh;
     height: 100vh;
+    overflow-y: hidden;
     background: linear-gradient(to top right, var(--primary-color-lighter) 50%, var(--secondary-color-lighter));
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -83,6 +84,18 @@ input:focus, button:focus, textarea:focus {
 }
 
 /* BUTTON */
+.btn-white > span.icon, .btn-red > span.icon{
+    font-size: 1.5em;
+    min-width: 50px;
+    min-height: 50px;
+    font-family: 'Material Symbols Outlined';
+}
+.btn-white, .btn-red{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .btn-red{
     background-color: var(--primary-color);
     color: white;
@@ -91,16 +104,19 @@ input:focus, button:focus, textarea:focus {
     border-radius: 10px;
     cursor: pointer;
     font-size: 1rem;
+    justify-content: center;
 }
 .btn-red:hover{
     background-color: var(--primary-color-darker);
 }
+.btn-red > span{
+    margin-right: 10px;
+    min-height: 0 !important;
+    min-width: 0 !important;
+}
 
 .btn-white{
     box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: flex-start;
     background-color: white;
     font-size: 1rem;
@@ -121,12 +137,6 @@ input:focus, button:focus, textarea:focus {
     font-weight: bold;
     text-transform: uppercase;
 }
-.btn-white > span.icon{
-    font-size: 1.5em;
-    min-width: 50px;
-    min-height: 50px;
-    font-family: 'Material Symbols Outlined';
-}
 .btn-white:hover, .btn-white:focus{
     border: 3px solid var(--primary-color)
 }
@@ -140,7 +150,13 @@ input:focus, button:focus, textarea:focus {
     position: absolute;
     right: 20px;
 }
-
+.btn-white.no-arrow::after{
+    display: none;
+}
+.btn-white.only-icon > span{
+    margin: 0;
+    background-color: transparent;
+}
 
 /* INPUT */
 input, textarea{
@@ -148,7 +164,7 @@ input, textarea{
     font-size: 1rem;
     border-radius: 10px;
     background-color: white;
-    border: 1px solid #e7e7e7;
+    border: 2px solid #e7e7e7;
     box-shadow: 0px 0px 23.3px -10px rgba(0, 0, 0, 0.25);
 }
 input::placeholder, textarea::placeholder{
@@ -174,4 +190,12 @@ input:focus, textarea:focus{
     0%   {background-position:-150% 0,-150% 0}
     66%  {background-position: 250% 0,-150% 0}
     100% {background-position: 250% 0, 250% 0}
+}
+
+/* BACK */
+#back{
+    padding: 0;
+    position: fixed;
+    top: var(--page-padding);
+    left: var(--page-padding);
 }

@@ -34,7 +34,7 @@ submit.addEventListener('click', async () => {
     } catch (error){
         login_label.classList.add('error');
         password_label.classList.add('error');
-        error_message.textContent = error.message;
+        error_message.textContent = error.message ? error.message : 'Identifiant ou mot de passe incorrect.';
     }
     hideLoader();
 

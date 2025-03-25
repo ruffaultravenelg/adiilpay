@@ -8,8 +8,8 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="styles/general.css">
-    <link rel="stylesheet" href="styles/account.css">
     <link rel="stylesheet" href="styles/card.css">
+    <link rel="stylesheet" href="styles/card_div.css">
 
 </head>
 <body>
@@ -18,16 +18,16 @@
 
         <section class="top">
             <h1>Easly</h1>
-            <h2>Compte utilisateur</h2>
+            <h2>Carte utilisateur</h2>
         </section>
 
-        <section class="actions">
+        <section class="actions showed">
 
             <div class="card">
   
                 <div class="card-names">
-                    <p id="card_firstname">havard</p>
-                    <p id="card_lastname">barnabé</p>
+                    <p id="card_lastname">havard</p>
+                    <p id="card_firstname">barnabé</p>
                 </div>
     
                 <p class="card-sold" id="card_sold">14.20€</p>
@@ -58,13 +58,13 @@
                 </button>
 
                 <button class="btn-white">
-                    <span class="icon">add_link</span>
-                    Définir une nouvelle carte
+                    <span class="icon">recycling</span>
+                    Réattribuer la carte
                 </button>
 
                 <button class="btn-white">
-                    <span class="icon">delete</span>
-                    Supprimer le compte
+                    <span class="icon">link_off</span>
+                    Désactiver la carte
                 </button>
 
             </div>
@@ -76,7 +76,7 @@
     </section>
 
     <!-- SCRIPTS -->
-    <script type="module" src="scripts/account.js"></script>
+    <script type="module" src="scripts/card.js"></script>
 
 </body>
 </html>
