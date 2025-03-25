@@ -32,8 +32,8 @@
 /* MAIN BACKGROUND */
 body{
     width: 100%;
-    min-height: 100vh;
-    height: 100vh;
+    min-height: 100dvh;
+    height: 100dvh;
     overflow-y: hidden;
     background: linear-gradient(to top right, var(--primary-color-lighter) 50%, var(--secondary-color-lighter));
     background-repeat: no-repeat;
