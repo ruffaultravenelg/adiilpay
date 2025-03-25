@@ -9,7 +9,7 @@ GET('/transactions/statistics').then(graph => {
     
     // Clear graph
     graph_columns.innerHTML = '';
-
+    graph = new Array(30).fill({date: new Date().getTime() - 30 * 24 * 60 * 60 * 1000}) // TODO: remove in prod
     // Get max value of payments
     //const maxPayments = Math.max(...graph.map(elm => elm.payments));
     const maxPayments = 100 //TODO: remove, it's for testings purposes
