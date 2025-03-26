@@ -13,7 +13,7 @@ const API_URL = 'https://api.adiilpay.com/v1'
  * @returns {Promise<Object>} A promise that resolves to the JSON response from the server.
  * @throws {Error} Throws an error if the request fails.
  */
-async function call(method, endpoint, data, bearer = true) {
+async function call(method, endpoint, data = undefined, bearer = true) {
 
     // Get bearer token
     const bearerToken = bearer ? getBearerToken() : '';
@@ -27,6 +27,11 @@ async function call(method, endpoint, data, bearer = true) {
         },
         body: JSON.stringify(data)
     });
+
+    // Early return if the response doesn't have content
+    if (response.status === 204 || response.status === 205) {
+        return null;
+    }
 
     // If the response is ok, return it
     if (response.ok)
@@ -64,4 +69,13 @@ export async function GET(endpoint, auth = true) {
  */
 export async function POST(endpoint, data, auth = true) {
     return call('POST', endpoint, data, auth);
+}
+
+/**
+ * Performs a DELETE request to the specified endpoint.
+ * @param {string} endpoint 
+ * @returns 
+ */
+export async function DELETE(endpoint) {
+    return call('DELETE', endpoint);
 }

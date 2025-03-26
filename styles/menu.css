@@ -21,7 +21,7 @@ section.actions{
     opacity: 0;
     z-index: -1;
     transform: translate(0, 100px);
-    transition: 0.8s ease;
+    transition: var(--animation-duration) ease;
 }
 section.actions.showed{
     z-index: 1;
@@ -36,7 +36,7 @@ section.actions .card{
     
     opacity: 0;
     transform: translate(-50%, -25%);
-    transition: all 0.8s ease;
+    transition: all var(--animation-duration) ease;
 }
 section.actions.showed .card{
     opacity: 1;

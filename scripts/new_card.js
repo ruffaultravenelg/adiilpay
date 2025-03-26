@@ -28,6 +28,8 @@ const update_nfc_modal = document.getElementById('update_nfc_modal');
 const nonfc_url = document.getElementById('nonfc_url');
 const nfc_write_btn = document.getElementById('nfc_write_btn');
 
+creation_modal.classList.add('showed');
+
 // On click
 document.getElementById('create_btn').addEventListener('click', async () => {
 

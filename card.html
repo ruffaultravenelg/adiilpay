@@ -64,7 +64,7 @@
                     Réattribuer la carte
                 </button>
 
-                <button class="btn-white">
+                <button class="btn-white" id="deactivate_btn">
                     <span class="icon">link_off</span>
                     Désactiver la carte
                 </button>
@@ -125,10 +125,34 @@
                 </div>
                 
             </div>
+
+            <!-- VALIDATE DEACTIVATE -->
+            <div id="deactivate_modal">
+    
+                <p class="title">Supprimer la carte</p>
+                <p class="text">Cette action est irreversible.</p>
+    
+                <div class="btns">
+                    <button class="btn-red" id="deactivate_modal_close">
+                        <span class="icon">close</span>
+                        Annuler
+                    </button>
+                    <button class="btn-red green" id="deactivate_modal_validate">
+                        <span class="icon">check_small</span>
+                        Valider
+                    </button>
+                </div>
+                
+            </div>
     
         </section>
 
     </section>
+
+    <!-- BACK BUTTON -->
+    <button onclick="history.back();" id="back" class="btn-white no-arrow only-icon">
+        <span class="icon">arrow_back</span>
+    </button>
 
     <!-- SCRIPTS -->
     <script type="module">

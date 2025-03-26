@@ -1,6 +1,7 @@
 // Imports
 import { showLoader, hideLoader } from './loader.js';
 import { GET } from './rest.js';
+import { explodeLabel } from './labelSplitter.js'
 
 // HTML Elements
 const search_input = document.getElementById('search_input');
@@ -11,10 +12,10 @@ search_input.addEventListener('input', updateSearchResult);
 
 // Fetch data
 showLoader();
-//const cards = await GET('/cards');
+const cards = await GET('/cards');
 hideLoader();
 
-//updateSearchResult();
+updateSearchResult();
 
 // Update search results
 function updateSearchResult(){
@@ -31,10 +32,13 @@ function updateSearchResult(){
     // Display results
     filtered_cards.forEach(card => {
         
+        // Get name
+        const { firstname, lastname } = explodeLabel(card.label);
+
         // Create user element
         const card_element = document.createElement('button');
         card_element.classList.add('btn-white')
-        card_element.innerHTML = `<span>${card.date}</span> ${card.label}`;
+        card_element.innerHTML = `<span>${lastname}</span> ${firstname}`;
         results.appendChild(card_element);
 
         // Add event listener

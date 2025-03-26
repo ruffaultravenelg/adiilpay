@@ -1,6 +1,7 @@
 // Imports
-import { GET } from './rest.js';
+import { GET, DELETE } from './rest.js';
 import { explodeLabel } from './labelSplitter.js';
+import { showLoader, hideLoader } from './loader.js';
 
 // HTML Elements
 const card_firstname = document.getElementById('admin_card_firstname');
@@ -53,4 +54,44 @@ add_depense_btn.onclick = () => {
 add_depense_modal_close.onclick = () => {
     add_depense_modal.classList.remove('showed');
     panel_admin.classList.add('showed');
+}
+
+
+////////////////////
+//// DEACTIVATE ////
+////////////////////
+const deactivate_modal = document.getElementById('deactivate_modal');
+const deactivate_btn = document.getElementById('deactivate_btn');
+const deactivate_modal_close = document.getElementById('deactivate_modal_close');
+const deactivate_modal_validate = document.getElementById('deactivate_modal_validate');
+
+// Open modal
+deactivate_btn.onclick = () => {
+    panel_admin.classList.remove('showed');
+    deactivate_modal.classList.add('showed');
+}
+
+// Close modal
+deactivate_modal_close.onclick = () => {
+    deactivate_modal.classList.remove('showed');
+    panel_admin.classList.add('showed');
+}
+
+// Validate deactivation
+deactivate_modal_validate.onclick = async () => {
+
+    try{
+        showLoader();
+        await DELETE(`/cards/${id}/nuke`);
+        hideLoader();
+        window.location.href = '/cards';
+    } catch (err) {
+        console.error(err);
+        deactivate_modal.classList.remove('showed');
+        panel_admin.classList.add('showed');
+    }
+
+    
+   
+    
 }
