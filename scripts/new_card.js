@@ -44,7 +44,7 @@ document.getElementById('create_btn').addEventListener('click', async () => {
     hideLoader();
 
     // Create url
-    const url = `https://pay.gemino.com/cards?id=${id}`;
+    const url = `https://pay.gemino.cev/cards?id=${id}`;
 
     // Hide creation window
     creation_modal.classList.remove('showed');
