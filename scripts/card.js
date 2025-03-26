@@ -1,6 +1,7 @@
 // Imports
 import { GET } from './rest.js';
 import { explodeLabel } from './labelSplitter.js';
+import { isConnected } from './auth.js'
 
 // HTML Elements
 const card_firstname = document.getElementById('card_firstname');
@@ -31,4 +32,11 @@ card_firstname.innerText = firstname;
 card_lastname.innerText = lastname;
 card_sold.innerText = `${userData.balance}€`;
 card_id.innerText = userData.id.substring(0, 15);
-card_orga.innerText = 'adiil pay'
+card_orga.innerText = localStorage.getItem('org_name');
+
+// Check if user is connected
+if (isConnected()){
+
+} else {
+    
+}
