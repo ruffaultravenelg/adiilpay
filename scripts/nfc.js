@@ -1,5 +1,5 @@
 // Supported ?
-export function isNFCReaderAvailable() {
+export function isNFCAvailable() {
 	return 'NDEFReader' in window
 }
 
@@ -13,4 +13,14 @@ export function readNFC() {
 			reject(error);
 		});
 	});
+}
+
+// NFC stuff
+export async function writeNFC(url) {
+	try{
+		const ndef = new NDEFReader();
+		await ndef.write({ records: [{ recordType: "url", data: url }] });
+	} catch (e){
+		throw e;
+	}
 }

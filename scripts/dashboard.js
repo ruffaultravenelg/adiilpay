@@ -1,6 +1,5 @@
 // Imports
 import { GET } from './rest.js';
-import { isNFCReaderAvailable, readNFC } from './nfc.js';
 
 // HTML Elements
 const graph_columns = document.getElementById('graph_columns');
@@ -36,9 +35,3 @@ GET('/transactions/statistics').then(graph => {
     graph_columns.scrollLeft = graph_columns.scrollWidth;
 
 });
-
-// NFC
-if (isNFCReaderAvailable()) {
-    const value = await readNFC();
-    alert(value);
-}

@@ -2,21 +2,7 @@
 import { POST } from './rest.js';
 import { explodeLabel } from "./labelSplitter.js";
 import { showLoader, hideLoader } from "./loader.js";
-import { isNFCReaderAvailable } from "./nfc.js";
-
-// NFC stuff
-async function saveToNFC(url) {
-    try {
-        const ndef = new NDEFReader();
-        await ndef.write({ records: [{ recordType: "url", data: url }] });
-        update_nfc_modal.classList.remove('showed');
-        nfc_ok_modal.classList.add('showed');
-    } catch (error) {
-        nfc_err_modal_errmsg.innerText = error.message;
-        update_nfc_modal.classList.remove('showed');
-        nfc_err_modal.classList.add('showed');
-    }
-}
+import { isNFCAvailable, writeNFC } from "./nfc.js";
 
 // Card
 const card_firstname = document.getElementById('card_firstname');
@@ -39,11 +25,8 @@ document.getElementById('copy_url').onclick = ()=>{
 const creation_modal = document.getElementById('creation_modal');
 const update_nonfc_modal = document.getElementById('update_nonfc_modal');
 const update_nfc_modal = document.getElementById('update_nfc_modal');
-const nfc_err_modal = document.getElementById('nfc_err_modal');
-const nfc_ok_modal = document.getElementById('nfc_ok_modal');
 const nonfc_url = document.getElementById('nonfc_url');
 const nfc_write_btn = document.getElementById('nfc_write_btn');
-const nfc_err_modal_errmsg = document.getElementById('nfc_err_modal_errmsg');
 
 // On click
 document.getElementById('create_btn').addEventListener('click', async () => {
@@ -68,12 +51,30 @@ document.getElementById('create_btn').addEventListener('click', async () => {
     creation_modal.classList.remove('showed');
 
     // Is NFC available ?
-    if (isNFCReaderAvailable()) {
+    if (isNFCAvailable() || true) {
         update_nfc_modal.classList.add('showed');
-        nfc_write_btn.onclick = () => saveToNFC(url);
+
+        async function tryWrite(){
+            showLoader();
+            try{
+                await writeNFC(url);
+                update_nfc_modal.classList.remove('showed');
+                window.location.href = "/dashboard";
+                hideLoader();
+            } catch (e){
+                update_nfc_modal.querySelector('.title').textContent = "Une erreur c'est produite."
+                update_nfc_modal.querySelector('.text').textContent = e.message
+                hideLoader();
+            }
+        }
+        
+        nfc_write_btn.onclick = tryWrite;
+        tryWrite();
+
     } else {
         nonfc_url.innerText = url;
         update_nonfc_modal.classList.add('showed');
     }
 
+    
 });

@@ -82,36 +82,12 @@
         <!-- NFC -->
         <div id="update_nfc_modal">
 
-            <p class="title">Approcher la carte</p>
-            <p class="text">Quand la carte est collé au dos du téléphone, appuyer sur "écrire".</p>
+            <p class="title">Approchez la carte</p>
+            <p class="text">Les données actuel seront écrasée.</p>
 
-            <button class="btn-red" id="nfc_write_btn">
+            <button class="btn-red" id="nfc_write_btn" hidden>
                 <span class="icon">nfc</span>
-                Ecrire
-            </button>
-        </div>
-
-        <!-- NFC OK -->
-        <div id="nfc_ok_modal">
-
-            <p class="title">Carte mis a jour !</p>
-            <p class="text">Vous pouvez enlever la carte, elle est prête.</p>
-
-            <button class="btn-red" onclick="window.location.href = '/dashboard'">
-                <span class="icon">home</span>
-                Retour au dashboard
-            </button>
-        </div>
-
-        <!-- NFC ERROR -->
-        <div id="nfc_err_modal">
-
-            <p class="title">Une erreur c'est produit</p>
-            <p class="text" id="nfc_err_modal_errmsg">Essayer plus tard ou verifier la comptabilité.</p>
-
-            <button class="btn-red" onclick="window.location.href = '/dashboard'">
-                <span class="icon">home</span>
-                Retour au dashboard
+                Réessayer
             </button>
         </div>
 
