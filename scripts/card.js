@@ -20,7 +20,7 @@ let userData;
 try {
     userData = await GET(`/cards/${id}`, false);
 } catch (err) {
-    //window.location.href = '/card404';
+    window.location.href = '/card404';
 }
 
 // Split label

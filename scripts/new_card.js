@@ -40,12 +40,11 @@ document.getElementById('create_btn').addEventListener('click', async () => {
 
     // Do post request
     showLoader();
-    //const { id } = await POST('card', { label });
-    const id = 'ijfeosifjeio';
+    const { id } = await POST('card', { label });
     hideLoader();
 
     // Create url
-    const url = `https://adiilpay.com/cards?id=${id}`;
+    const url = `https://pay.gemino.com/cards?id=${id}`;
 
     // Hide creation window
     creation_modal.classList.remove('showed');
