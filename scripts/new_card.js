@@ -6,20 +6,15 @@ import { isNFCSupported } from "./nfc.js";
 
 // NFC stuff
 async function saveToNFC(url) {
-    if (!('NDEFReader' in window)) {
-        console.error("Web NFC n'est pas supporté par ce navigateur.");
-        alert("Votre navigateur ne supporte pas la fonctionnalité NFC.");
-        return;
-    }
-
     try {
         const ndef = new NDEFReader();
         await ndef.write({ records: [{ recordType: "url", data: url }] });
-        console.log("L'URL a été enregistrée avec succès sur la carte NFC !");
-        alert("L'URL a été sauvegardée avec succès !");
+        update_nfc_modal.classList.remove('showed');
+        nfc_ok_modal.classList.add('showed');
     } catch (error) {
-        console.error("Erreur lors de l'écriture sur le NFC :", error);
-        alert("Échec de l'écriture sur la carte NFC. Veuillez réessayer.");
+        nfc_err_modal_errmsg.innerText = error.message;
+        update_nfc_modal.classList.remove('showed');
+        nfc_err_modal.classList.add('showed');
     }
 }
 
@@ -38,6 +33,12 @@ label_input.onkeyup = () => {
 // Modals
 const creation_modal = document.getElementById('creation_modal');
 const update_nonfc_modal = document.getElementById('update_nonfc_modal');
+const update_nfc_modal = document.getElementById('update_nfc_modal');
+const nfc_err_modal = document.getElementById('nfc_err_modal');
+const nfc_ok_modal = document.getElementById('nfc_ok_modal');
+const nonfc_url = document.getElementById('nonfc_url');
+const nfc_write_btn = document.getElementById('nfc_write_btn');
+const nfc_err_modal_errmsg = document.getElementById('nfc_err_modal_errmsg');
 
 // On click
 document.getElementById('create_btn').addEventListener('click', async () => {
@@ -55,13 +56,18 @@ document.getElementById('create_btn').addEventListener('click', async () => {
     const id = 'ijfeosifjeio';
     hideLoader();
 
+    // Create url
+    const url = `${window.location.origin}/cards?id=${id}`;
+
     // Hide creation window
     creation_modal.classList.remove('showed');
 
     // Is NFC available ?
     if (isNFCSupported()) {
-        alert('huh');
+        update_nfc_modal.classList.add('showed');
+        nfc_write_btn.onclick = () => saveToNFC(url);
     } else {
+        nonfc_url.innerText = url;
         update_nonfc_modal.classList.add('showed');
     }
 

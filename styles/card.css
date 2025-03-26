@@ -55,7 +55,6 @@ section.actions.showed .card{
         opacity: 1;
         transform: translate(-50%, -50);
     }
-    
 }
 section.actions .card-spacer{
     height: calc(178px / 2 + var(--page-padding));

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="styles/card.css">
     <link rel="stylesheet" href="styles/card_div.css">
     <link rel="stylesheet" href="styles/new_card.css">
+    <link rel="stylesheet" href="styles/modals.css">
 
 </head>
 <body>
@@ -53,27 +54,66 @@
 
             </div>
 
-        </section>
+        </section>        
 
-        <section class="modals">
-            <section id="update_nonfc_modal">
-                <p class="title">NFC non supporté</p>
-                <p class="text">Modifier le contenu de la carte NFC manuellement pour y mettre l'adresse suivante :</p>
+    </section>
 
-                <div class="url">
-                    <p>https://adiilpay.com/cards?id=1868607292297505154</p>
-                    <button class="btn-red only-icon">
-                        <span class="icon">content_copy</span>
-                    </button>
-                </div>
+    <section class="modals">
 
-                <button class="btn-red" onclick="window.location.href = '/dashboard'">
-                    <span class="icon">home</span>
-                    Retour au dashboard
+        <!-- NO NFC -->
+        <div id="update_nonfc_modal">
+
+            <p class="title">NFC non supporté</p>
+            <p class="text">Modifier le contenu de la carte NFC manuellement pour y mettre l'adresse suivante :</p>
+
+            <div class="url">
+                <p id="nonfc_url">https://adiilpay.com/cards?id=1868607292297505154</p>
+                <button class="btn-red only-icon">
+                    <span class="icon">content_copy</span>
                 </button>
-            </section>
-        </section>
-        
+            </div>
+
+            <button class="btn-red" onclick="window.location.href = '/dashboard'">
+                <span class="icon">home</span>
+                Retour au dashboard
+            </button>
+        </div>
+
+        <!-- NFC -->
+        <div id="update_nfc_modal">
+
+            <p class="title">Approcher la carte</p>
+            <p class="text">Quand la carte est collé au dos du téléphone, appuyer sur "écrire".</p>
+
+            <button class="btn-red" id="nfc_write_btn">
+                <span class="icon">nfc</span>
+                Ecrire
+            </button>
+        </div>
+
+        <!-- NFC OK -->
+        <div id="nfc_ok_modal">
+
+            <p class="title">Carte mis a jour !</p>
+            <p class="text">Vous pouvez enlever la carte, elle est prête.</p>
+
+            <button class="btn-red" onclick="window.location.href = '/dashboard'">
+                <span class="icon">home</span>
+                Retour au dashboard
+            </button>
+        </div>
+
+        <!-- NFC ERROR -->
+        <div id="nfc_err_modal">
+
+            <p class="title">Une erreur c'est produit</p>
+            <p class="text" id="nfc_err_modal_errmsg">Essayer plus tard ou verifier la comptabilité.</p>
+
+            <button class="btn-red" onclick="window.location.href = '/dashboard'">
+                <span class="icon">home</span>
+                Retour au dashboard
+            </button>
+        </div>
 
     </section>
 
@@ -85,6 +125,7 @@
     <!-- SCRIPTS -->
     <script type="module" src="scripts/organisation.js"></script>
     <script type="module" src="scripts/new_card.js"></script>
+    <script type="module" src="scripts/modals.js"></script>
 
 </body>
 </html>
