@@ -51,7 +51,7 @@ document.getElementById('create_btn').addEventListener('click', async () => {
     creation_modal.classList.remove('showed');
 
     // Is NFC available ?
-    if (isNFCAvailable() || true) {
+    if (isNFCAvailable()) {
         update_nfc_modal.classList.add('showed');
 
         async function tryWrite(){
