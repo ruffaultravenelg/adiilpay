@@ -40,7 +40,7 @@ document.getElementById('create_btn').addEventListener('click', async () => {
 
     // Do post request
     showLoader();
-    const { id } = await POST('card', { label });
+    const { id } = await POST('/cards', { label });
     hideLoader();
 
     // Create url
