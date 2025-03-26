@@ -1,66 +1,67 @@
-/* CONTENT */
-section.content{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+/* VIEWPORT */
+.content{
+    max-height: 100dvh;
+}
+
+/* USER VIEW */
+#panel_user{
+    width: 100%;
+    height: calc(100dvh - 60px - (2 * var(--page-padding)));
     position: relative;
 }
 
-/* ACTIONS */
-section.actions{
-    left: 50%;
-    bottom: 0;
-    background-color: white;
-    border-radius: 30px 30px 0 0;
-    padding: 0 var(--page-padding) var(--page-padding) var(--page-padding);
-    margin-top: calc(178px / 2);
+#panel_user #transactions{
     width: 100%;
-    max-width: var(--size-threshold);
-    
-    opacity: 0;
-    z-index: -1;
-}
-section.actions.showed{
-    animation: sec_in 0.8s ease forwards;
-    z-index: 1;
-}
-@keyframes sec_in {
-    from{
-        opacity: 0.0;
-        transform: translate(0, 100px);
-    }
-    to{
-        opacity: 1;
-        transform: translate(0, 0);
-    }
-}
-
-section.actions .card{
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-}
-section.actions.showed .card{
-    animation: card_in 0.8s ease forwards;
-}
-@keyframes card_in {
-    from{
-        opacity: 0;
-        transform: translate(-50%, -25%);
-    }
-    to{
-        opacity: 1;
-        transform: translate(-50%, -50);
-    }
-}
-section.actions .card-spacer{
-    height: calc(178px / 2 + var(--page-padding));
-}
-
-.btns{
+    height: 100%;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     gap: 20px;
+    padding: 0 var(--page-padding) var(--page-padding) var(--page-padding);
+}
+
+#panel_user #transactions > div{
+    width: 100%;
+    max-width: 318px; /*var(--size-threshold);*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-shadow: var(--shadow);
+    justify-content: flex-start;
+    background-color: white;
+    font-size: 1rem;
+    color: black;
+    position: relative;
+    padding: 10px;
+    border-radius: 15px;
+    border: 3px solid transparent;
+    user-select: none;
+}
+
+#panel_user #transactions > div > span:first-child{
+    margin-right: 10px;
+    color: var(--primary-color);
+    background-color: var(--primary-color-lighter);
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+#panel_user #transactions > div > span:last-child {
+    content: "arrow_forward_ios";
+    font-family: 'Material Symbols Outlined';
+    font-size: 22px;
+    color: var(--primary-color);
+    position: absolute;
+    right: 20px;
+}
+
+#panel_user > .card{
+    position: absolute;
+    left: 50%;
+    bottom: var(--page-padding);
+    transform: translateX(-50%);
 }

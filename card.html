@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/menu.css">
     <link rel="stylesheet" href="styles/card.css">
     <link rel="stylesheet" href="styles/card_div.css">
 
@@ -21,20 +22,20 @@
             <h1>Carte utilisateur</h1>
         </section>
 
-        <section class="actions showed">
+        <section id="panel_admin" class="actions showed">
 
             <div class="card">
   
                 <div class="card-names">
-                    <p id="card_lastname">havard</p>
-                    <p id="card_firstname">barnabé</p>
+                    <p id="admin_card_lastname">havard</p>
+                    <p id="admin_card_firstname">barnabé</p>
                 </div>
     
-                <p class="card-sold" id="card_sold">14.20€</p>
+                <p class="card-sold" id="admin_card_sold">14.20€</p>
     
-                <p class="card-id" id="card_id">1868607292297505154</p>
+                <p class="card-id" id="admin_card_id">1868607292297505154</p>
     
-                <p class="card-orga" id="card_orga">ADIIL PAY</p>
+                <p class="card-orga" id="admin_card_orga">ADIIL PAY</p>
     
             </div>
 
@@ -71,12 +72,68 @@
 
         </section>
 
+        <section id="panel_user">
+            
+            <div id="transactions">
 
+                <!-- AUTO GENERATED -->
+                <div>
+                    <span>+200€</span>
+                    17/02/30
+                    <span class="icon">cycle</span>
+                </div>
+
+            </div>
+
+            <div class="card">
+  
+                <div class="card-names">
+                    <p id="user_card_lastname">havard</p>
+                    <p id="user_card_firstname">barnabé</p>
+                </div>
+    
+                <p class="card-sold" id="user_card_sold">14.20€</p>
+    
+                <p class="card-id" id="user_card_id">1868607292297505154</p>
+    
+                <p class="card-orga" id="user_card_orga">ADIIL PAY</p>
+    
+            </div>
+
+        </section>
 
     </section>
 
     <!-- SCRIPTS -->
-    <script type="module" src="scripts/card.js"></script>
+    <script type="module">
+
+        // Import
+        import { isConnected } from './scripts/auth.js'
+
+        // Get panels
+        const panel_admin = document.getElementById('panel_admin');
+        const panel_user = document.getElementById('panel_user');
+
+        // Create script object
+        const script = document.createElement('script');
+        script.type = 'module';
+
+        // Set script source & panel visibility
+        if (isConnected() && false) {
+            panel_admin.style.display = '';
+            panel_user.style.display = 'none';
+            script.src = './scripts/card_admin.js';
+
+        } else {
+            panel_admin.style.display = 'none';
+            panel_user.style.display = '';
+            script.src = './scripts/card_user.js';
+        }
+
+        // Append script
+        document.body.appendChild(script);
+
+    </script>
 
 </body>
 </html>
