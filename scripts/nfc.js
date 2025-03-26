@@ -1,8 +1,16 @@
 // Supported ?
-export function isNFCSupported() {
-  return 'nfc' in navigator;
+export function isNFCReaderAvailable() {
+	return 'NDEFReader' in window
 }
 
-// Write
-
-
+// Read
+export function readNFC() {
+	return new Promise((resolve, reject) => {
+		const ndef = new NDEFReader();
+		ndef.scan().then((message) => {
+			resolve(message);
+		}).catch((error) => {
+			reject(error);
+		});
+	});
+}

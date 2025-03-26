@@ -2,7 +2,7 @@
 import { POST } from './rest.js';
 import { explodeLabel } from "./labelSplitter.js";
 import { showLoader, hideLoader } from "./loader.js";
-import { isNFCSupported } from "./nfc.js";
+import { isNFCReaderAvailable } from "./nfc.js";
 
 // NFC stuff
 async function saveToNFC(url) {
@@ -68,7 +68,7 @@ document.getElementById('create_btn').addEventListener('click', async () => {
     creation_modal.classList.remove('showed');
 
     // Is NFC available ?
-    if (isNFCSupported()) {
+    if (isNFCReaderAvailable()) {
         update_nfc_modal.classList.add('showed');
         nfc_write_btn.onclick = () => saveToNFC(url);
     } else {

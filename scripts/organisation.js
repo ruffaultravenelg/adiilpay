@@ -9,4 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (organisation_name)
         organisation_name.textContent = localStorage.getItem('org_name');
 
+    document.title = localStorage.getItem('org_name');
+
 });
