@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="styles/menu.css">
     <link rel="stylesheet" href="styles/card.css">
     <link rel="stylesheet" href="styles/card_div.css">
+    <link rel="stylesheet" href="styles/modals.css">
 
 </head>
 <body>
@@ -22,7 +23,7 @@
             <h1>Carte utilisateur</h1>
         </section>
 
-        <section id="panel_admin" class="actions showed">
+        <section id="panel_admin" class="actions">
 
             <div class="card">
   
@@ -43,7 +44,7 @@
 
             <div class="btns">
 
-                <button class="btn-white">
+                <button class="btn-white" id="add_depense_btn">
                     <span class="icon">add</span>
                     Ajouter une dépense
                 </button>
@@ -102,6 +103,31 @@
 
         </section>
 
+        <section class="modals">
+
+            <!-- ADD TRANSACTION -->
+            <div id="add_depense_modal">
+    
+                <p class="title">Ajouter une dépense</p>
+                <p class="text">Spécifier le montant a retirer de la carte</p>
+    
+                <input type="number" placeholder="30" min="0" step="0.01">
+    
+                <div class="btns">
+                    <button class="btn-red" id="add_depense_modal_close">
+                        <span class="icon">close</span>
+                        Annuler
+                    </button>
+                    <button class="btn-red green">
+                        <span class="icon">check_small</span>
+                        Valider
+                    </button>
+                </div>
+                
+            </div>
+    
+        </section>
+
     </section>
 
     <!-- SCRIPTS -->
@@ -119,8 +145,9 @@
         script.type = 'module';
 
         // Set script source & panel visibility
-        if (isConnected() && false) {
+        if (isConnected()) {
             panel_admin.style.display = '';
+            panel_admin.classList.add('showed');
             panel_user.style.display = 'none';
             script.src = './scripts/card_admin.js';
 

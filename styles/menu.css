@@ -20,40 +20,27 @@ section.actions{
     
     opacity: 0;
     z-index: -1;
+    transform: translate(0, 100px);
+    transition: 0.8s ease;
 }
 section.actions.showed{
-    animation: sec_in 0.8s ease forwards;
     z-index: 1;
-}
-@keyframes sec_in {
-    from{
-        opacity: 0.0;
-        transform: translate(0, 100px);
-    }
-    to{
-        opacity: 1;
-        transform: translate(0, 0);
-    }
+    opacity: 1;
+    transform: translate(0, 0);
 }
 
 section.actions .card{
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
+    
     opacity: 0;
+    transform: translate(-50%, -25%);
+    transition: all 0.8s ease;
 }
 section.actions.showed .card{
-    animation: card_in 0.8s ease forwards;
-}
-@keyframes card_in {
-    from{
-        opacity: 0;
-        transform: translate(-50%, -25%);
-    }
-    to{
-        opacity: 1;
-        transform: translate(-50%, -50);
-    }
+    opacity: 1;
+    transform: translate(-50%, -50%);
 }
 section.actions .card-spacer{
     height: calc(178px / 2 + var(--page-padding));

@@ -3,12 +3,11 @@ import { GET } from './rest.js';
 import { explodeLabel } from './labelSplitter.js';
 
 // HTML Elements
-const panel = document.getElementById('admin_panel_admin');
-const card_firstname = panel.getElementById('admin_card_firstname');
-const card_lastname = panel.getElementById('admin_card_lastname');
-const card_sold = panel.getElementById('admin_card_sold');
-const card_id = panel.getElementById('admin_card_id');
-const card_orga = panel.getElementById('admin_card_orga');
+const card_firstname = document.getElementById('admin_card_firstname');
+const card_lastname = document.getElementById('admin_card_lastname');
+const card_sold = document.getElementById('admin_card_sold');
+const card_id = document.getElementById('admin_card_id');
+const card_orga = document.getElementById('admin_card_orga');
 
 // Get user id ?id
 const urlParams = new URLSearchParams(window.location.search);
@@ -33,3 +32,25 @@ card_lastname.innerText = lastname;
 card_sold.innerText = `${userData.balance}€`;
 card_id.innerText = userData.id.substring(0, 15);
 card_orga.innerText = localStorage.getItem('org_name');
+
+///////////////////////////
+//// ADD DEPENSE MODAL ////
+///////////////////////////
+
+// Elements
+const add_depense_btn = document.getElementById('add_depense_btn');
+const add_depense_modal = document.getElementById('add_depense_modal');
+const add_depense_modal_close = document.getElementById('add_depense_modal_close');
+
+// Open modal
+add_depense_btn.onclick = () => {
+    panel_admin.classList.remove('showed');
+    add_depense_modal.classList.add('showed');
+    console.log(add_depense_modal);
+}
+
+// Close modal
+add_depense_modal_close.onclick = () => {
+    add_depense_modal.classList.remove('showed');
+    panel_admin.classList.add('showed');
+}

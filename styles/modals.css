@@ -47,6 +47,10 @@
     font-size: 1rem;
     margin-bottom: 20px;
 }
+.modals > div > input{
+    text-align: center;
+    width: 100%;
+}
 
 /* ANIM */
 .modals > div > *{
