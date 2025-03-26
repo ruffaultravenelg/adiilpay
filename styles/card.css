@@ -17,7 +17,7 @@ section.actions{
     padding: 0 var(--page-padding) var(--page-padding) var(--page-padding);
     margin-top: calc(178px / 2);
     width: 100%;
-    max-width: 600px;
+    max-width: var(--size-threshold);
     
     opacity: 0;
     z-index: -1;

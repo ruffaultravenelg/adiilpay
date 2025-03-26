@@ -25,7 +25,7 @@ section.form .elm{
     gap: 10px;
 }
 section.form .elm label{
-    font-size: 1em;
+    font-size: 1.3rem;
     font-weight: bold;
     text-align: center;
 }
@@ -44,7 +44,7 @@ section.form label.error{
     width: 100%;
     text-align: center;
     color: var(--error-color);
-    font-size: 0.8em;
+    font-size: 1rem;
 }
 
 /* BOTTOM LINKS */
@@ -56,6 +56,6 @@ section.create{
 }
 section.create a{
     color: var(--primary-color);
-    font-size: 0.9em;
+    font-size: 1rem;
     font-weight: normal;
 }

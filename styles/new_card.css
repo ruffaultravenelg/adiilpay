@@ -3,8 +3,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
-    padding: 15px 15px 15px 30px;
+    padding: 10px 10px 10px 20px;
     background-color: #EEE;
     border-radius: 5px;
     max-width: 100%;
@@ -14,4 +15,11 @@
     font-family: 'Consolas', monospace;
     font-size: 1rem;
     white-space: nowrap;
+}
+#update_nonfc_modal .url button{
+    width: 45px;
+    height: 45px;
+}
+#update_nonfc_modal .url button > span{
+    font-size: 17px;
 }

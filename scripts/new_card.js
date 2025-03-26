@@ -30,6 +30,11 @@ label_input.onkeyup = () => {
     card_lastname.innerText = lastname;
 }
 
+// Copy to clipboard button
+document.getElementById('copy_url').onclick = ()=>{
+    navigator.clipboard.writeText(nonfc_url.textContent);
+}
+
 // Modals
 const creation_modal = document.getElementById('creation_modal');
 const update_nonfc_modal = document.getElementById('update_nonfc_modal');
@@ -57,7 +62,7 @@ document.getElementById('create_btn').addEventListener('click', async () => {
     hideLoader();
 
     // Create url
-    const url = `${window.location.origin}/cards?id=${id}`;
+    const url = `https://adiilpay.com/cards?id=${id}`;
 
     // Hide creation window
     creation_modal.classList.remove('showed');
