@@ -20,6 +20,7 @@
     justify-content: flex-start;
     gap: 20px;
     padding: 0 var(--page-padding) var(--page-padding) var(--page-padding);
+    padding-bottom: 400px;
 }
 
 #panel_user #transactions > div{

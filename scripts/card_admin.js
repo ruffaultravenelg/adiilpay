@@ -1,7 +1,9 @@
 // Imports
-import { GET, DELETE } from './rest.js';
+import { GET, DELETE, POST } from './rest.js';
 import { explodeLabel } from './labelSplitter.js';
 import { showLoader, hideLoader } from './loader.js';
+import { showMenu, hideMenu } from './menu.js';
+import { showModal, hideModal } from './modals.js';
 
 // HTML Elements
 const card_firstname = document.getElementById('admin_card_firstname');
@@ -34,47 +36,112 @@ card_sold.innerText = `${userData.balance}€`;
 card_id.innerText = userData.id.substring(0, 15);
 card_orga.innerText = localStorage.getItem('org_name');
 
+// Refresh window with ?view_transaction argument
+document.getElementById('view_transaction_btn').onclick = () => {
+    const currentUrl = new URL(window.location.href);
+    currentUrl.searchParams.set('view_transactions', 'true');
+    window.location.href = currentUrl.toString();
+};
+
 ///////////////////////////
 //// ADD DEPENSE MODAL ////
 ///////////////////////////
 
 // Elements
 const add_depense_btn = document.getElementById('add_depense_btn');
-const add_depense_modal = document.getElementById('add_depense_modal');
 const add_depense_modal_close = document.getElementById('add_depense_modal_close');
+const add_depense_modal_validate = document.getElementById('add_depense_modal_validate');
+const add_depense_modal_amount = document.getElementById('add_depense_modal_amount');
+const add_depense_modal_description = document.getElementById('add_depense_modal_description');
 
 // Open modal
 add_depense_btn.onclick = () => {
-    panel_admin.classList.remove('showed');
-    add_depense_modal.classList.add('showed');
-    console.log(add_depense_modal);
+    hideMenu();
+    showModal('add_depense_modal');
 }
 
 // Close modal
 add_depense_modal_close.onclick = () => {
-    add_depense_modal.classList.remove('showed');
-    panel_admin.classList.add('showed');
+    hideModal('add_depense_modal');
+    showMenu();
 }
 
+// Validate
+add_depense_modal_validate.onclick = async () => {
+    const amount = add_depense_modal_amount.value;
+    const description = add_depense_modal_description.value ? add_depense_modal_description.value : 'Achat à la boutique';
+    if (amount && amount !== 0) {
+        showLoader();
+        try {
+            await POST(`/card/${id}/transaction`, { amount: -amount, description, type: 'PAYMENT' });
+            hideModal('add_depense_modal');
+            showMenu();
+        } catch (err) {
+            hideModal('add_depense_modal');
+            showError("Pas assez d'argent sur votre carte");
+        }
+        hideLoader();
+    }
+}
+
+//////////////////////
+//// CREDIT MODAL ////
+//////////////////////
+
+// Elements
+const credit_btn = document.getElementById('credit_btn');
+const credit_modal_close = document.getElementById('credit_modal_close');
+const credit_modal_validate = document.getElementById('credit_modal_validate');
+const credit_modal_amount = document.getElementById('credit_modal_amount');
+const credit_modal_description = document.getElementById('credit_modal_description');
+
+// Open modal
+credit_btn.onclick = () => {
+    hideMenu();
+    showModal('credit_modal');
+}
+
+// Close modal
+credit_modal_close.onclick = () => {
+    hideModal('credit_modal');
+    showMenu();
+}
+
+// Validate
+credit_modal_validate.onclick = async () => {
+    const amount = credit_modal_amount.value;
+    const description = credit_modal_description.value ? credit_modal_description.value : 'Recharge';
+    if (amount && amount !== 0) {
+        showLoader();
+        try {
+            await POST(`/card/${id}/transaction`, { amount: +amount, description, type: 'DEPOSIT' });
+            hideModal('credit_modal');
+            showMenu();
+        } catch (err) {
+            hideModal('credit_modal');
+            showError(err);
+        }
+        hideLoader();
+    }
+}
 
 ////////////////////
 //// DEACTIVATE ////
 ////////////////////
-const deactivate_modal = document.getElementById('deactivate_modal');
 const deactivate_btn = document.getElementById('deactivate_btn');
 const deactivate_modal_close = document.getElementById('deactivate_modal_close');
 const deactivate_modal_validate = document.getElementById('deactivate_modal_validate');
 
 // Open modal
 deactivate_btn.onclick = () => {
-    panel_admin.classList.remove('showed');
-    deactivate_modal.classList.add('showed');
+    hideMenu();
+    showModal('deactivate_modal');
 }
 
 // Close modal
 deactivate_modal_close.onclick = () => {
-    deactivate_modal.classList.remove('showed');
-    panel_admin.classList.add('showed');
+    hideModal('deactivate_modal');
+    showMenu();
 }
 
 // Validate deactivation
@@ -87,11 +154,27 @@ deactivate_modal_validate.onclick = async () => {
         window.location.href = '/cards';
     } catch (err) {
         console.error(err);
-        deactivate_modal.classList.remove('showed');
-        panel_admin.classList.add('showed');
+        hideModal('deactivate_modal');
+        showMenu();
     }
+    
+}
 
-    
-   
-    
+/////////////////////
+//// ERROR MODAL ////
+/////////////////////
+const error_modal_text = document.getElementById('error_modal_text');
+const error_modal_ok = document.getElementById('error_modal_ok');
+
+// Open modal
+function showError(msg){
+    hideMenu();
+    error_modal_text.innerText = msg;
+    showModal('error_modal');
+}
+
+// Close modal
+error_modal_ok.onclick = () => {
+    hideModal('error_modal');
+    showMenu();
 }

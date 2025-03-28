@@ -44,17 +44,17 @@
 
             <div class="btns">
 
-                <button class="btn-white" id="add_depense_btn">
+                <button class="btn-white" id="add_depense_btn" tabindex="1">
                     <span class="icon">add</span>
                     Ajouter une dépense
                 </button>
 
-                <button class="btn-white">
+                <button class="btn-white" id="credit_btn">
                     <span class="icon">savings</span>
                     Créditer le compte
                 </button>
 
-                <button class="btn-white">
+                <button class="btn-white" id="view_transaction_btn">
                     <span class="icon">receipt_long</span>
                     Voir toute les transactions
                 </button>
@@ -111,14 +111,37 @@
                 <p class="title">Ajouter une dépense</p>
                 <p class="text">Spécifier le montant a retirer de la carte</p>
     
-                <input type="number" placeholder="30" min="0" step="0.01">
+                <input type="number" placeholder="30" min="0" step="0.01" id="add_depense_modal_amount">
+                <input type="text" placeholder="Achat a la boutique" id="add_depense_modal_description">
     
                 <div class="btns">
                     <button class="btn-red" id="add_depense_modal_close">
                         <span class="icon">close</span>
                         Annuler
                     </button>
-                    <button class="btn-red green">
+                    <button class="btn-red green" id="add_depense_modal_validate">
+                        <span class="icon">check_small</span>
+                        Valider
+                    </button>
+                </div>
+                
+            </div>
+
+            <!-- CREDIT -->
+            <div id="credit_modal">
+    
+                <p class="title">Créditer le compte</p>
+                <p class="text">Spécifier le montant a créditer sur la carte</p>
+    
+                <input type="number" placeholder="30" min="0" step="0.01" id="credit_modal_amount">
+                <input type="text" placeholder="Recharge" id="credit_modal_description">
+    
+                <div class="btns">
+                    <button class="btn-red" id="credit_modal_close">
+                        <span class="icon">close</span>
+                        Annuler
+                    </button>
+                    <button class="btn-red green" id="credit_modal_validate">
                         <span class="icon">check_small</span>
                         Valider
                     </button>
@@ -142,6 +165,19 @@
                         Valider
                     </button>
                 </div>
+                
+            </div>
+
+            <!-- ERROR -->
+            <div id="error_modal">
+    
+                <p class="title">Une erreur est survenue</p>
+                <p class="text" id="error_modal_text">Erreur inconnue.</p>
+    
+                <button class="btn-red" id="error_modal_ok">
+                    <span class="icon">arrow_back</span>
+                    Retour
+                </button>
                 
             </div>
     
@@ -168,10 +204,13 @@
         const script = document.createElement('script');
         script.type = 'module';
 
+        // Get view_transactions
+        const urlParams = new URLSearchParams(window.location.search);
+        const view_transactions = urlParams.get('view_transactions');
+
         // Set script source & panel visibility
-        if (isConnected()) {
+        if (isConnected() && (!view_transactions || view_transactions !== 'true')) {
             panel_admin.style.display = '';
-            panel_admin.classList.add('showed');
             panel_user.style.display = 'none';
             script.src = './scripts/card_admin.js';
 

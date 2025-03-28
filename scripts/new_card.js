@@ -3,6 +3,8 @@ import { POST } from './rest.js';
 import { explodeLabel } from "./labelSplitter.js";
 import { showLoader, hideLoader } from "./loader.js";
 import { isNFCAvailable, writeNFC } from "./nfc.js";
+import { hideMenu } from "./menu.js";
+import { showModal, hideModal } from "./modals.js";
 
 // Card
 const card_firstname = document.getElementById('card_firstname');
@@ -22,13 +24,9 @@ document.getElementById('copy_url').onclick = ()=>{
 }
 
 // Modals
-const creation_modal = document.getElementById('creation_modal');
-const update_nonfc_modal = document.getElementById('update_nonfc_modal');
 const update_nfc_modal = document.getElementById('update_nfc_modal');
 const nonfc_url = document.getElementById('nonfc_url');
 const nfc_write_btn = document.getElementById('nfc_write_btn');
-
-creation_modal.classList.add('showed');
 
 // On click
 document.getElementById('create_btn').addEventListener('click', async () => {
@@ -49,24 +47,23 @@ document.getElementById('create_btn').addEventListener('click', async () => {
     const url = `https://pay.gemino.dev/card?id=${id}`;
 
     // Hide creation window
-    creation_modal.classList.remove('showed');
+    hideMenu();
 
     // Is NFC available ?
     if (isNFCAvailable()) {
-        update_nfc_modal.classList.add('showed');
+        showModal('update_nfc_modal');
 
         async function tryWrite(){
             showLoader();
             try{
                 await writeNFC(url);
-                update_nfc_modal.classList.remove('showed');
+                hideModal('update_nfc_modal');
                 window.location.href = "/dashboard";
-                hideLoader();
             } catch (e){
                 update_nfc_modal.querySelector('.title').textContent = "Une erreur c'est produite."
                 update_nfc_modal.querySelector('.text').textContent = e.message
-                hideLoader();
             }
+            hideLoader();
         }
         
         nfc_write_btn.onclick = tryWrite;
@@ -74,7 +71,7 @@ document.getElementById('create_btn').addEventListener('click', async () => {
 
     } else {
         nonfc_url.innerText = url;
-        update_nonfc_modal.classList.add('showed');
+        showModal('update_nonfc_modal');
     }
 
     
