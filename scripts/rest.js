@@ -2,7 +2,7 @@
 import { getBearerToken } from './auth.js';
 
 // API base url
-const API_URL = 'https://api.adiilpay.com/v1'
+const API_URL = 'https://api.adiilpay.com'
 
 /**
  * Makes an asynchronous HTTP request using the Fetch API.
