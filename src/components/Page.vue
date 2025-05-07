@@ -1,0 +1,98 @@
+<script>
+export default {
+
+    name: 'Page',
+
+    props: {
+        title: {
+            type: String,
+            required: false,
+            default: 'Pay'
+        },
+        subtitle: {
+            type: String,
+            required: false,
+            default: 'Prepaid cards'
+        },
+        loading: {
+            type: Boolean,
+            required: false,
+            default: false
+        }
+    },
+
+}
+</script>
+
+<template>
+
+    <div class="container">
+
+        <p class="title">{{ title }}</p>
+        <h1 class="subtitle">{{ subtitle }}</h1>
+
+        <div class="page">
+            <slot></slot>
+        </div>
+
+    </div>
+
+    <div v-if="loading" class="loader"></div>
+
+</template>
+
+<style scoped>
+
+/* PAGE */
+.container{
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.title{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-black);
+    width: 100%;
+    text-align: center;
+    padding: 30px 30px 0 30px;
+}
+
+.subtitle{
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: var(--color-black);
+    width: 100%;
+    text-align: center;
+    padding: 0 30px 30px 30px;
+}
+
+.page{
+    padding: 30px;
+    width: 100%;
+    height: 100%;
+}
+
+/* LOADER */
+.loader {
+    z-index: 105;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    width: 100vw;
+    --c: no-repeat linear-gradient(var(--color-primary) 0 0);
+    background: var(--c),var(--c),var(--color-primary-lighter);
+    background-size: 60% 100%;
+    animation: l16 2s infinite;
+}
+@keyframes l16 {
+    0%   {background-position:-150% 0,-150% 0}
+    66%  {background-position: 250% 0,-150% 0}
+    100% {background-position: 250% 0, 250% 0}
+}
+
+</style>

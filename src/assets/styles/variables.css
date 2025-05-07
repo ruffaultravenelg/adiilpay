@@ -1,0 +1,22 @@
+:root{
+    --color-primary: #E15757;
+
+    --color-primary-transparent: color-mix(in srgb, var(--color-primary), transparent 50%);
+    --color-primary-darker: color-mix(in srgb, var(--color-primary), black 20%);
+    --color-primary-lighter: color-mix(in srgb, var(--color-primary), white 92%);
+
+    --color-background-one: #F8EDF6;
+    --color-background-two: #E6EEF9;  
+    
+    --color-black: black;
+    --color-white: white;
+    --color-placeholder: #ADADAD;
+
+    --color-error: #cc0000;
+
+    --shadow: 0px 0px 23.3px -10px rgba(0, 0, 0, 0.25);
+
+    --animation-duration: 0.4s;
+
+    --max-width: 500px;
+}
