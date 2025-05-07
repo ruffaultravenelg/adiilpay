@@ -1,18 +1,22 @@
 <script>
+import orgaService from '@/services/orgaService';
+
+
 export default {
 
-    name: 'Page',
+    name: 'OrgaPage',
+
+    data(){
+        return{
+            orgaName: orgaService.getName(),
+        }
+    },
 
     props: {
-        title: {
+        name: {
             type: String,
             required: false,
             default: 'Pay'
-        },
-        subtitle: {
-            type: String,
-            required: false,
-            default: 'Prepaid cards'
         },
         loading: {
             type: Boolean,
@@ -28,8 +32,8 @@ export default {
 
     <div class="container">
 
-        <p class="title">{{ title }}</p>
-        <h1 class="subtitle">{{ subtitle }}</h1>
+        <p class="title">{{ orgaName }}</p>
+        <h1 class="subtitle">{{ name }}</h1>
 
         <div class="page">
             <slot></slot>
@@ -37,6 +41,13 @@ export default {
 
     </div>
 
+    <button
+        class="btn btn-item only-icon back-btn"
+        @click="$router.go(-1)"
+    >
+        <i>chevron_left</i>
+    </button>
+    
     <div v-if="loading" class="loader"></div>
 
 </template>
@@ -93,6 +104,14 @@ export default {
     0%   {background-position:-150% 0,-150% 0}
     66%  {background-position: 250% 0,-150% 0}
     100% {background-position: 250% 0, 250% 0}
+}
+
+/* BACK BUTTON */
+.back-btn{
+    position: fixed;
+    top: var(--padding);
+    left: var(--padding);
+    width: auto;
 }
 
 </style>

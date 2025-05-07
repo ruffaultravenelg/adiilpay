@@ -1,36 +1,62 @@
 <script>
-import Page from '@/components/Page.vue'
 import Modal from '@/components/Modal.vue'
+import dashboardService from '@/services/dashboardService'
+import OrgaPage from '@/components/OrgaPage.vue'
 
 export default {
 
-    components: {Page, Modal},
+    components: {OrgaPage, Modal},
+
+    mounted(){
+        dashboardService.getStatistics()
+            .then(response => {
+                this.loading = false
+                console.log(response)
+            })
+            .catch(error => {
+                this.loading = false
+                console.error(error)
+            })
+    },
 
     data(){
         return {
-            showModal: false,
-            loading: false,
+            loading: true,
         }
-    }
+    },
 
 }
 </script>
 
 <template>
+    <OrgaPage name="Dashborad" :loading="loading">
+        <div class="container">
+            
+            <div></div>
 
-    <Page title="Pay" subtitle="Dashborad" :loading="loading">
-        <button @click="showModal = true" class="btn-red">Popup</button>
-        <button @click="loading = !loading" class="btn-red wide">change loading state</button>
-    </Page>
+            <div class="btn-container">
+                <RouterLink class="btn btn-item" :to="{ name: 'dashboard' }"><i>history</i>Dernières transactions</RouterLink>
+                <RouterLink class="btn btn-item" :to="{ name: 'cards' }"><i>account_balance</i>Voir toute les cartes</RouterLink>
+                <RouterLink class="btn btn-item" :to="{ name: 'dashboard' }"><i>edit</i>Modifier mon compte</RouterLink>
+            </div>
 
-    <Modal :visible="showModal">
-        <h1>test</h1>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <button class="btn-red wide" @click="showModal = false">Fermer</button>
-    </Modal>
-
+        </div>
+    </OrgaPage>
 </template>
+
+<style scoped>
+
+.container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.btn-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+</style>

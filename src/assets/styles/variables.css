@@ -19,4 +19,12 @@
     --animation-duration: 0.4s;
 
     --max-width: 500px;
+
+    --padding: 10vw;
+}
+
+@media (min-width: 768px) {
+    :root {
+        --padding: 50px;
+    }
 }

@@ -13,11 +13,11 @@ export default {
 <template>
 
     <!-- Background -->
-    <transition name="fade" appear="true">
+    <transition name="fade" appear>
         <div v-show="visible" class="background">
         
             <!-- Modal -->
-            <transition name="modal" appear="true">
+            <transition name="modal" appear>
                 <div v-show="visible" class="modal-container">
                     <slot></slot>
                 </div>
