@@ -22,7 +22,12 @@ export default {
             type: Boolean,
             required: false,
             default: false
-        }
+        },
+        noPadding: {
+            type: Boolean,
+            required: false,
+            default: false
+        },
     },
 
 }
@@ -35,7 +40,7 @@ export default {
         <p class="title">{{ orgaName }}</p>
         <h1 class="subtitle">{{ name }}</h1>
 
-        <div class="page">
+        <div :class="'page' + (noPadding ? ' no-padding' : '')">
             <slot></slot>
         </div>
 
@@ -77,14 +82,19 @@ export default {
     color: var(--color-black);
     width: 100%;
     text-align: center;
-    padding: 0 var(--padding);
+    padding: 0 var(--padding) var(--padding) var(--padding);
 }
 
 .page{
     padding: var(--padding);
+    padding-top: 0;
     width: 100%;
     height: 100%;
     position: relative;
+    overflow: hidden;
+}
+.page.no-padding{
+    padding: 0;
 }
 
 /* LOADER */
@@ -111,7 +121,6 @@ export default {
     position: fixed;
     top: var(--padding);
     left: var(--padding);
-    width: auto;
 }
 
 </style>

@@ -6,7 +6,29 @@ export default {
             type: Boolean,
             default: false
         }
-    }
+    },
+    data() {
+        return {
+            showed: false,
+        }
+    },
+    methods: {
+        show(){
+            this.showed = true;
+        },
+        close(){
+            this.showed = false;
+        }
+    },
+    watch: {
+        visible(newValue) {
+            if (newValue)
+                this.show();
+            else
+                this.close();
+        }
+    },
+    
 }
 </script>
 
@@ -14,11 +36,11 @@ export default {
 
     <!-- Background -->
     <transition name="fade" appear>
-        <div v-show="visible" class="background">
+        <div v-show="showed" class="background" @click.self="close">
         
             <!-- Modal -->
             <transition name="modal" appear>
-                <div v-show="visible" class="modal-container">
+                <div v-show="showed" class="modal-container">
                     <slot></slot>
                 </div>
             </transition>
@@ -46,7 +68,7 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease;
+  transition: opacity var(--animation-duration) ease;
 }
 .fade-enter-from,
 .fade-leave-to {

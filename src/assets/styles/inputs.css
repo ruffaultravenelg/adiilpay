@@ -10,6 +10,7 @@
 
 /* BUTTON */
 .btn{
+    user-select: none;
     --main: transparent;
     --hover: rgba(0, 0, 0, 0.1);
     --active: rgba(0, 0, 0, 0.2);
@@ -47,6 +48,12 @@
     font-family: 'Material Symbols Outlined';
     font-size: 1rem;
     font-style: normal;
+}
+
+.btn[disabled]{
+    background-color: color-mix(in srgb, var(--main), #6b6b6b9f 80%);
+    color: var(--color-white);
+    cursor: auto;
 }
 
 /* PRIMARY BUTTON */
@@ -128,6 +135,7 @@
 
 .btn-item.only-icon{
     padding: 0 !important;
+    width: auto !important;
 }
 .btn-item.only-icon > i{
     background-color: transparent;
@@ -139,6 +147,7 @@
 
 /* INPUT */
 .input{
+    user-select: none;
     padding: 15px;
     font-size: 1rem;
     border-radius: 10px;

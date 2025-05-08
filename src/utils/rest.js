@@ -14,46 +14,47 @@ const API_URL = 'https://api.adiilpay.com'
  * @returns {Promise<Object>} A promise that resolves to the JSON response from the server.
  * @throws {Error} Throws an error if the request fails.
  */
-function call(method, endpoint, data = undefined, bearer = true) {
-
-    // Get bearer token
+async function call(method, endpoint, data = undefined, bearer = true) {
     const bearerToken = bearer ? getBearerToken() : '';
 
-    // Fetch API
-    return fetch(API_URL + endpoint, {
-        method: method,
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${bearerToken}`,
-        },
-        body: JSON.stringify(data)
-    })
-    .then( res =>{
+    try {
+        const res = await fetch(API_URL + endpoint, {
+            method,
+            headers: {
+                'Content-Type': 'application/json',
+                ...(bearerToken && { 'Authorization': `Bearer ${bearerToken}` }),
+            },
+            body: data ? JSON.stringify(data) : undefined,
+        });
 
-        // Early return if the response doesn't have content
-        if (res.status === 204 || res.status === 205)
-            return null;
+        // No content
+        if (res.status === 204 || res.status === 205) return null;
 
-        // Return data
-        if (res.ok)
-            return res.json();
-
-        // Invalid token / expired session
-        if (res.status === 498)
+        // Redirect if token expired
+        if (res.status === 498) {
             redirectToLogin();
+            return;
+        }
 
-        // Get the message
-        return res.json()
-            .then( error => {
-                throw new Error(error.message);
-            });
+        const result = await res.json().catch(() => null); // handle invalid JSON
 
-        
-    })
-    .catch( err => {
-        throw new Error(err.message)
-    });
+        if (!res.ok) {
+            // throw structured error
+            const message = result ? (result.details ? result.details[0] : result.message) : 'Une erreur est survenue';
+            throw {
+                status: res.status,
+                message: message,
+            };
+        }
 
+        return result;
+
+    } catch (error) {
+        //throw error;
+        throw {
+            message: error?.message || 'Une erreur est survenue',
+        };
+    }
 }
 
 /**
