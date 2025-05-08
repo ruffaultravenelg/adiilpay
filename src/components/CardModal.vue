@@ -5,10 +5,10 @@ import Card from './Card.vue';
 export default{
     name: 'CardModal',
     components: { Modal, Card },
+    emits: ['close'],
 
     props: {
         card: {
-            type: Object,
             required: true,
         },
     },
@@ -26,7 +26,7 @@ export default{
 </script>
 
 <template>
-    <Modal ref="modal">
+    <Modal ref="modal" @close="$emit('close')">
         <Transition name="card" appear>
             <Card :card="card" class="card" v-show="$refs.modal?.showed"/>
         </Transition>

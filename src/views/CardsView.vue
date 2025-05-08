@@ -70,9 +70,14 @@ export default{
         </div>
 
         <div class="card-list">
-            <button v-for="card in filteredCards" :key="card.id" class="btn btn-item">
+            <RouterLink
+                v-for="card in filteredCards"
+                :key="card.id"
+                class="btn btn-item"
+                :to="{ name: 'card', params: { id: card.id } }"
+            >
                 <span>{{ card.lastname }}</span>{{ card.firstname }}
-            </button>
+            </RouterLink>
         </div>
 
     </OrgaPage>
@@ -87,9 +92,11 @@ export default{
 
 .search{
     padding: 0 var(--padding);
+    padding-bottom: 5px;
 }
 
 .card-list{
+    z-index: 1;
     width: 100%;
     height: 100%;
     display: flex;

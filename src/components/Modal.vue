@@ -1,6 +1,7 @@
 <script>
 export default {
     name: 'Modal',
+    emits: ['close'],
     props: {
         visible: {
             type: Boolean,
@@ -17,6 +18,7 @@ export default {
             this.showed = true;
         },
         close(){
+            this.$emit('close');
             this.showed = false;
         }
     },

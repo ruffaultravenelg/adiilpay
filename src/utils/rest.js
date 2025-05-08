@@ -26,7 +26,7 @@ async function call(method, endpoint, data = undefined, bearer = true) {
             },
             body: data ? JSON.stringify(data) : undefined,
         });
-
+        
         // No content
         if (res.status === 204 || res.status === 205) return null;
 

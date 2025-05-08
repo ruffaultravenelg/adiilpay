@@ -6,7 +6,6 @@ export default{
     name: 'Card',
     props: {
         card: {
-            type: Object,
             required: true,
         },
     },
@@ -32,18 +31,18 @@ export default{
 
 <template>
 
-    <div class="card">
+    <div class="card" v-if="card">
     
-    <div class="card-names">
-        <p>{{ lastname }}</p>
-        <p>{{ firstname }}</p>
-    </div>
+        <div class="card-names">
+            <p>{{ lastname }}</p>
+            <p>{{ firstname }}</p>
+        </div>
 
-    <p class="card-sold">{{ card.balance }}&euro;</p>
+        <p class="card-sold">{{ card.balance }}&euro;</p>
 
-    <p class="card-id">{{ card.id }}</p>
+        <p class="card-id">{{ card.id }}</p>
 
-    <p class="card-orga">{{ orgaName }}</p>
+        <p class="card-orga">{{ orgaName }}</p>
 
     </div>
 

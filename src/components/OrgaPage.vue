@@ -1,10 +1,11 @@
 <script>
 import orgaService from '@/services/orgaService';
-
+import Loader from './Loader.vue';
 
 export default {
 
     name: 'OrgaPage',
+    components: {Loader},
 
     data(){
         return{
@@ -53,7 +54,7 @@ export default {
         <i>chevron_left</i>
     </button>
     
-    <div v-if="loading" class="loader"></div>
+    <Loader :loading="loading" />
 
 </template>
 
@@ -82,12 +83,12 @@ export default {
     color: var(--color-black);
     width: 100%;
     text-align: center;
-    padding: 0 var(--padding) var(--padding) var(--padding);
+    padding: 0 var(--padding) calc(var(--padding) - 5px) var(--padding);
 }
 
 .page{
     padding: var(--padding);
-    padding-top: 0;
+    padding-top: 5px !important;
     width: 100%;
     height: 100%;
     position: relative;
@@ -95,25 +96,6 @@ export default {
 }
 .page.no-padding{
     padding: 0;
-}
-
-/* LOADER */
-.loader {
-    z-index: 105;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    height: 4px;
-    width: 100vw;
-    --c: no-repeat linear-gradient(var(--color-primary) 0 0);
-    background: var(--c),var(--c),var(--color-primary-lighter);
-    background-size: 60% 100%;
-    animation: l16 2s infinite;
-}
-@keyframes l16 {
-    0%   {background-position:-150% 0,-150% 0}
-    66%  {background-position: 250% 0,-150% 0}
-    100% {background-position: 250% 0, 250% 0}
 }
 
 /* BACK BUTTON */
