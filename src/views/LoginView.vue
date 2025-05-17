@@ -51,12 +51,12 @@ export default{
             
                 <div class="elm">
                     <label for="login">Identifiant</label>
-                    <input type="text" name="login" class="input wide" tabindex="1" v-model="login_input" placeholder="Identifiant">
+                    <input type="text" id="login" class="input wide" tabindex="1" v-model="login_input" placeholder="Identifiant">
                 </div>
 
                 <div class="elm">
                     <label for="password">Mot de passe</label>
-                    <input type="password" name="password" class="input wide" tabindex="2" v-model="password_input" placeholder="Mot de passe">
+                    <input type="password" id="password" class="input wide" tabindex="2" v-model="password_input" placeholder="Mot de passe">
                 </div>
 
                 <button class="btn btn-primary wide" id="submit" tabindex="3" @click="login()">Se connecter</button>
@@ -84,34 +84,10 @@ export default{
     align-items: center;
 }
 
-.form{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: var(--padding);
-}
-
-.elm{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-}
-
 .error_message{
     color: #f00;
     font-size: 0.9rem;
     text-align: center;
-}
-
-label{
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--color-black);
 }
 
 </style>

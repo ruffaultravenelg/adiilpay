@@ -30,6 +30,11 @@ const router = createRouter({
             component: () => import('../views/CardsView.vue'),
         },
         {
+            path: '/card/:id',
+            name: 'card',
+            component: () => import('../views/CardView.vue'),
+        },
+        {
             path: '/:pathMatch(.*)*',
             name: 'page-not-found',
             component: () => import('../views/PageNotFound.vue'),

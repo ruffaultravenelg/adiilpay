@@ -2,11 +2,19 @@
 import OrgaPage from '@/components/OrgaPage.vue';
 import cardService from '@/services/cardService';
 import { explodeLabel } from '@/utils/labelSplitter.js';
+<<<<<<< HEAD
 import ButtonPrimary from '@/components/inputs/ButtonPrimary.vue'
 
 export default{
 
     components: { OrgaPage, ButtonPrimary },
+=======
+import NewCardModal from '@/components/NewCardModal.vue';
+
+export default{
+
+    components: {OrgaPage, NewCardModal},
+>>>>>>> 28d4ac09385f44904976eeec1a9bdf46b0653edf
 
     data(){
         return {
@@ -40,7 +48,12 @@ export default{
                 })
                 .finally( () => this.loading = false );
             
-        }
+        },
+
+
+        newCard(){
+            this.$refs.newCardModal.show();
+        },
 
     },
 
@@ -58,30 +71,53 @@ export default{
 </script>
 
 <template>
-    <OrgaPage name="Liste des cartes" :loading="loading">
+    <OrgaPage name="Liste des cartes" :loading="loading" noPadding>
         
-        <input type="text" placeholder="Rechercher une carte" class="input wide" v-model="search" />
+        <div class="search">
+            <input type="text" placeholder="Rechercher une carte" class="input wide" v-model="search" />
+        </div>
 
-        <ButtonPrimary label="bonjour" />
-        <ButtonPrimary label="bonjour" icon="add" />
         <div class="card-list">
-            <button v-for="card in filteredCards" :key="card.id" class="btn btn-item">
+            <RouterLink
+                v-for="card in filteredCards"
+                :key="card.id"
+                class="btn btn-item"
+                :to="{ name: 'card', params: { id: card.id } }"
+            >
                 <span>{{ card.lastname }}</span>{{ card.firstname }}
-            </button>
+            </RouterLink>
         </div>
 
     </OrgaPage>
+
+    <button class="btn btn-item only-icon new-btn" @click="newCard()"><i>add</i></button>
+
+    <NewCardModal ref="newCardModal" @cardCreated="refreshCards" />
+
 </template>
 
 <style scoped>
 
+.search{
+    padding: 0 var(--padding);
+    padding-bottom: 5px;
+}
+
 .card-list{
-    margin-top: var(--padding);
+    z-index: 1;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
+    padding: var(--padding) var(--padding) calc(var(--padding) * 3) var(--padding);
+    overflow-y: auto;
+}
+
+.new-btn{
+    position: absolute;
+    bottom: var(--padding);
+    right: var(--padding);
 }
 
 

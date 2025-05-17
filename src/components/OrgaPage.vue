@@ -1,10 +1,11 @@
 <script>
 import orgaService from '@/services/orgaService';
-
+import Loader from './Loader.vue';
 
 export default {
 
     name: 'OrgaPage',
+    components: {Loader},
 
     data(){
         return{
@@ -22,7 +23,12 @@ export default {
             type: Boolean,
             required: false,
             default: false
-        }
+        },
+        noPadding: {
+            type: Boolean,
+            required: false,
+            default: false
+        },
     },
 
 }
@@ -35,7 +41,7 @@ export default {
         <p class="title">{{ orgaName }}</p>
         <h1 class="subtitle">{{ name }}</h1>
 
-        <div class="page">
+        <div :class="'page' + (noPadding ? ' no-padding' : '')">
             <slot></slot>
         </div>
 
@@ -48,7 +54,7 @@ export default {
         <i>chevron_left</i>
     </button>
     
-    <div v-if="loading" class="loader"></div>
+    <Loader :loading="loading" />
 
 </template>
 
@@ -77,33 +83,19 @@ export default {
     color: var(--color-black);
     width: 100%;
     text-align: center;
-    padding: 0 var(--padding);
+    padding: 0 var(--padding) calc(var(--padding) - 5px) var(--padding);
 }
 
 .page{
     padding: var(--padding);
+    padding-top: 5px !important;
     width: 100%;
     height: 100%;
     position: relative;
+    overflow: hidden;
 }
-
-/* LOADER */
-.loader {
-    z-index: 105;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    height: 4px;
-    width: 100vw;
-    --c: no-repeat linear-gradient(var(--color-primary) 0 0);
-    background: var(--c),var(--c),var(--color-primary-lighter);
-    background-size: 60% 100%;
-    animation: l16 2s infinite;
-}
-@keyframes l16 {
-    0%   {background-position:-150% 0,-150% 0}
-    66%  {background-position: 250% 0,-150% 0}
-    100% {background-position: 250% 0, 250% 0}
+.page.no-padding{
+    padding: 0;
 }
 
 /* BACK BUTTON */
@@ -111,7 +103,6 @@ export default {
     position: fixed;
     top: var(--padding);
     left: var(--padding);
-    width: auto;
 }
 
 </style>
