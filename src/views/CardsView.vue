@@ -2,10 +2,11 @@
 import OrgaPage from '@/components/OrgaPage.vue';
 import cardService from '@/services/cardService';
 import { explodeLabel } from '@/utils/labelSplitter.js';
+import ButtonPrimary from '@/components/inputs/ButtonPrimary.vue'
 
 export default{
 
-    components: {OrgaPage},
+    components: { OrgaPage, ButtonPrimary },
 
     data(){
         return {
@@ -61,12 +62,13 @@ export default{
         
         <input type="text" placeholder="Rechercher une carte" class="input wide" v-model="search" />
 
+        <ButtonPrimary label="bonjour" />
+        <ButtonPrimary label="bonjour" icon="add" />
         <div class="card-list">
             <button v-for="card in filteredCards" :key="card.id" class="btn btn-item">
                 <span>{{ card.lastname }}</span>{{ card.firstname }}
             </button>
         </div>
-
 
     </OrgaPage>
 </template>
