@@ -2,19 +2,12 @@
 import OrgaPage from '@/components/OrgaPage.vue';
 import cardService from '@/services/cardService';
 import { explodeLabel } from '@/utils/labelSplitter.js';
-<<<<<<< HEAD
+import NewCardModal from '@/components/NewCardModal.vue';
 import ButtonPrimary from '@/components/inputs/ButtonPrimary.vue'
 
 export default{
 
-    components: { OrgaPage, ButtonPrimary },
-=======
-import NewCardModal from '@/components/NewCardModal.vue';
-
-export default{
-
-    components: {OrgaPage, NewCardModal},
->>>>>>> 28d4ac09385f44904976eeec1a9bdf46b0653edf
+    components: {OrgaPage, NewCardModal, ButtonPrimary},
 
     data(){
         return {
