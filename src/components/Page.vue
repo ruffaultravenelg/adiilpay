@@ -1,9 +1,8 @@
 <script>
-import Loader from '@/components/Loader.vue';
 export default {
 
     name: 'Page',
-    components: {Loader},
+    components: {},
 
     props: {
         title: {
@@ -15,11 +14,6 @@ export default {
             type: String,
             required: false,
             default: 'Prepaid cards'
-        },
-        loading: {
-            type: Boolean,
-            required: false,
-            default: false
         }
     },
 
@@ -38,8 +32,6 @@ export default {
         </div>
 
     </div>
-
-    <Loader :loading="loading" />
 
 </template>
 

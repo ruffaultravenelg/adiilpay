@@ -3,16 +3,19 @@ import OrgaPage from '@/components/OrgaPage.vue';
 import cardService from '@/services/cardService';
 import { explodeLabel } from '@/utils/labelSplitter.js';
 import NewCardModal from '@/components/NewCardModal.vue';
-import ButtonPrimary from '@/components/inputs/ButtonPrimary.vue'
+import ItemButton from '@/components/inputs/ItemButton.vue';
+import IconButton from '@/components/inputs/IconButton.vue';
+import loaderMixin from '@/mixins/loaderMixin';
+import TextInput from '@/components/inputs/TextInput.vue';
 
 export default{
 
-    components: {OrgaPage, NewCardModal, ButtonPrimary},
+    components: {OrgaPage, NewCardModal, ItemButton, IconButton, TextInput},
+    mixins: [loaderMixin],
 
     data(){
         return {
             cards: [],
-            loading: true,
             search: '',
         }
     },
@@ -24,11 +27,11 @@ export default{
     methods:{
 
         refreshCards(){
-            this.loading = true;
+            this.showLoader();
 
             cardService.getCards()
                 .then( data =>{
-
+                    console.log(data)
                     this.cards = data.map(card => {
                         const { firstname, lastname } = explodeLabel(card.label);
                         return {
@@ -39,7 +42,7 @@ export default{
                     });
 
                 })
-                .finally( () => this.loading = false );
+                .finally( () => this.hideLoader() );
             
         },
 
@@ -52,7 +55,7 @@ export default{
 
     computed: {
         filteredCards(){
-            const search_term = this.search.toLowerCase();
+            const search_term = this.search.toLowerCase().trim();
             return this.cards.filter(card => 
                 (card.id + ' ' + card.date + ' ' + card.label).toLowerCase().includes(search_term)
             );
@@ -64,26 +67,25 @@ export default{
 </script>
 
 <template>
-    <OrgaPage name="Liste des cartes" :loading="loading" noPadding>
+    <OrgaPage name="Liste des cartes" noPadding>
         
         <div class="search">
-            <input type="text" placeholder="Rechercher une carte" class="input wide" v-model="search" />
+            <TextInput placeholder="Recehrcher une carte" v-model="search" class="no-shadow"/>
         </div>
 
         <div class="card-list">
-            <RouterLink
+            <ItemButton
                 v-for="card in filteredCards"
                 :key="card.id"
-                class="btn btn-item"
                 :to="{ name: 'card', params: { id: card.id } }"
-            >
-                <span>{{ card.lastname }}</span>{{ card.firstname }}
-            </RouterLink>
+                :label="card.firstname"
+                :span="card.lastname"
+            />
         </div>
 
     </OrgaPage>
 
-    <button class="btn btn-item only-icon new-btn" @click="newCard()"><i>add</i></button>
+    <IconButton icon="add" class="new-btn" @click="newCard()" />
 
     <NewCardModal ref="newCardModal" @cardCreated="refreshCards" />
 
@@ -105,6 +107,7 @@ export default{
     gap: 1.2rem;
     padding: var(--padding) var(--padding) calc(var(--padding) * 3) var(--padding);
     overflow-y: auto;
+    scrollbar-width: none;
 }
 
 .new-btn{

@@ -7,6 +7,7 @@
 /* LOAD STYLES */
 @import './inputs.css';
 @import './form.css';
+@import './loader.css';
 
 /* GENERAL STYLES */
 *{

@@ -1,15 +1,18 @@
 <script>
+import ButtonPrimary from '@/components/inputs/ButtonPrimary.vue';
+import TextInput from '@/components/inputs/TextInput.vue';
 import Page from '@/components/Page.vue'
+import loaderMixin from '@/mixins/loaderMixin';
 import authService from '@/services/authService';
 
 export default{
-    components: {Page},
+    components: {Page, ButtonPrimary, TextInput},
+    mixins: [loaderMixin],
 
     data(){
         return {
             login_input: '',
             password_input: '',
-            loading: false,
             error_message: '',
         }
     },
@@ -29,10 +32,10 @@ export default{
                 return;
             }
 
-            this.loading = true;
+            this.showLoader();
             authService.login(this.login_input, this.password_input)
                 .catch( err => {
-                    this.loading = false;
+                    this.hideLoader();
                     this.error_message = 'Identifiant ou mot de passe incorrect';
                 })
 
@@ -45,21 +48,21 @@ export default{
 
 <template>
 
-    <Page title="Pay" subtitle="Connexion" :loading="loading">
+    <Page title="Pay" subtitle="Connexion">
         <div class="container">
             <section class="form">
             
                 <div class="elm">
                     <label for="login">Identifiant</label>
-                    <input type="text" id="login" class="input wide" tabindex="1" v-model="login_input" placeholder="Identifiant">
+                    <TextInput id="login" tabindex="1" v-model="login_input" placeholder="Identifiant"/>
                 </div>
 
                 <div class="elm">
                     <label for="password">Mot de passe</label>
-                    <input type="password" id="password" class="input wide" tabindex="2" v-model="password_input" placeholder="Mot de passe">
+                    <TextInput type="password" id="password" tabindex="2" v-model="password_input" placeholder="Mot de passe" />
                 </div>
 
-                <button class="btn btn-primary wide" id="submit" tabindex="3" @click="login()">Se connecter</button>
+                <ButtonPrimary class="wide" tabindex="3" @click="login()" label="Se connecter" />
 
                 <p class="error_message">{{ error_message }}</p>
 

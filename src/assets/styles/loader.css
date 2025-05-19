@@ -1,23 +1,5 @@
-<script>
-export default{
-    name: 'Loader',
-    props: {
-        loading: {
-            type: Boolean,
-            default: false
-        },
-    },
-}
-</script>
-
-<template>
-    <div v-if="loading" class="loader"></div>
-</template>
-
-<style scoped>
-
-/* LOADER */
-.loader {
+/* BAR LOADER */
+.bar-loader {
     z-index: 105;
     position: fixed;
     bottom: 0;
@@ -34,5 +16,3 @@ export default{
     66%  {background-position: 250% 0,-150% 0}
     100% {background-position: 250% 0, 250% 0}
 }
-
-</style>

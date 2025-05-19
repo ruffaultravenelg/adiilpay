@@ -9,7 +9,7 @@ export default{
 
 <template>
 
-    <Page title="Page inconnu" subtitle="La page que vous cherchez n'existe pas" :loading="false">
+    <Page title="Page inconnu" subtitle="La page que vous cherchez n'existe pas">
         <div class="container">
             <RouterLink class="btn btn-primary" :to="{ name: 'dashboard' }"><i>home</i> Retour à l'accueil</RouterLink>
         </div>

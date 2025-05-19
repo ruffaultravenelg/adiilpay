@@ -1,7 +1,7 @@
 <script>
 
 export default{
-    name: 'ButtonPrimary',
+    name: 'ButtonValidate',
 
     props: {
         label: {
@@ -19,7 +19,7 @@ export default{
 </script>
 
 <template>
-    <button class="btn btn-primary">
+    <button class="btn btn-green">
         <i v-if="icon">{{ icon }}</i>
         {{ label }}
     </button>

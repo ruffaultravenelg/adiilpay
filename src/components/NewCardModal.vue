@@ -2,15 +2,15 @@
 import cardService from '@/services/cardService';
 import CardModal from './CardModal.vue';
 import toastMixin from '@/mixins/toastMixin';
+import ButtonValidate from './inputs/ButtonValidate.vue';
+import ButtonCancel from './inputs/ButtonCancel.vue';
 
 export default{
     name: 'NewCardModal',
     emits: ['cardCreated'],
     mixins: [toastMixin],
 
-    components: {
-        CardModal
-    },
+    components: { CardModal, ButtonValidate, ButtonCancel },
     
     data() {
         return {
@@ -65,12 +65,13 @@ export default{
             
             <div class="elm">
                 <label for="card_label">Label</label>
+                
                 <input type="text" id="card_label" class="input wide" placeholder="Nom Prénom" v-model="tempCard.label" required>
             </div>
 
             <div class="btns">
-                <button class="btn btn-red" @click="close"><i>close</i>Annuler</button>
-                <button class="btn btn-green" @click="create" :disabled="!canSubmit"><i>save</i>Sauvegarder</button>
+                <ButtonCancel label="Annuler" icon="close" @click="close" />
+                <ButtonValidate label="Sauvegarder" icon="save" :disabled="!canSubmit" @click="create" />
             </div>
 
         </div>

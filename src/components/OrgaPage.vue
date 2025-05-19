@@ -1,11 +1,11 @@
 <script>
 import orgaService from '@/services/orgaService';
-import Loader from './Loader.vue';
+import IconButton from './inputs/IconButton.vue';
 
 export default {
 
     name: 'OrgaPage',
-    components: {Loader},
+    components: {IconButton},
 
     data(){
         return{
@@ -18,11 +18,6 @@ export default {
             type: String,
             required: false,
             default: 'Pay'
-        },
-        loading: {
-            type: Boolean,
-            required: false,
-            default: false
         },
         noPadding: {
             type: Boolean,
@@ -47,14 +42,11 @@ export default {
 
     </div>
 
-    <button
-        class="btn btn-item only-icon back-btn"
+    <IconButton
+        class="back-btn"
+        icon="chevron_left"
         @click="$router.go(-1)"
-    >
-        <i>chevron_left</i>
-    </button>
-    
-    <Loader :loading="loading" />
+    />
 
 </template>
 

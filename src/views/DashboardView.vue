@@ -2,21 +2,22 @@
 import Modal from '@/components/Modal.vue'
 import dashboardService from '@/services/dashboardService'
 import OrgaPage from '@/components/OrgaPage.vue'
+import ItemButton from '@/components/inputs/ItemButton.vue'
+import toastMixin from '@/mixins/toastMixin'
+import loaderMixin from '@/mixins/loaderMixin'
 
 export default {
 
-    components: {OrgaPage, Modal},
+    components: {OrgaPage, Modal, ItemButton},
+    mixins: [toastMixin, loaderMixin],
 
     mounted(){
+        this.showLoader();
         dashboardService.getStatistics()
-            .then(response => {
-                this.loading = false
-                console.log(response)
+            .then(res => {
+                this.hideLoader();
             })
-            .catch(error => {
-                this.loading = false
-                console.error(error)
-            })
+            .catch( e => this.toastCatch(e) )
     },
 
     data(){
@@ -29,16 +30,16 @@ export default {
 </script>
 
 <template>
-    <OrgaPage name="Dashborad" :loading="loading">
+    <OrgaPage name="Dashborad">
         <div class="container">
             
             <div></div>
 
             <div class="btn-container">
-                <RouterLink tabindex="1" class="btn btn-item" :to="{ name: 'dashboard' }"><i>history</i>Dernières transactions</RouterLink>
-                <RouterLink tabindex="2" class="btn btn-item" :to="{ name: 'cards' }"><i>account_balance</i>Voir toute les cartes</RouterLink>
-                <RouterLink tabindex="3" class="btn btn-item" :to="{ name: 'dashboard' }"><i>edit</i>Modifier mon compte</RouterLink>
-                <RouterLink tabindex="4" class="btn btn-item" :to="{ name: 'logout' }"><i>logout</i>Se déconnecter</RouterLink>
+                <ItemButton tabindex="1" label="Dernières transactions" icon="history" :to="{ name: 'dashboard' }" />
+                <ItemButton tabindex="2" label="Voir toute les cartes" icon="account_balance" :to="{ name: 'cards' }" />
+                <ItemButton tabindex="3" label="Modifier mon compte" icon="edit" :to="{ name: 'dashboard' }" />
+                <ItemButton tabindex="4" label="Se déconnecter" icon="logout" :to="{ name: 'logout' }" />
             </div>
 
         </div>
