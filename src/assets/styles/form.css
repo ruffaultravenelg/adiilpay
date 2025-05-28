@@ -17,6 +17,11 @@
 }
 
 label{
+    font-size: 1rem;
+    font-weight: normal;
+    color: var(--color-black);
+}
+label.bold{
     font-size: 1.2rem;
     font-weight: bold;
     color: var(--color-black);

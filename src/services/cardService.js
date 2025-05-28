@@ -10,9 +10,10 @@ export default {
         return GET(`/cards/${id}`);
     },
 
-    deleteCard(id){
-        return DELETE(`/cards/${id}`);
+    nukeCard(id){
+        return DELETE(`/cards/${id}/nuke`);
     },
+    
 
     createCard(card){
         return POST('/cards', card);

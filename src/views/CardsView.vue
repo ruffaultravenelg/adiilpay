@@ -1,16 +1,10 @@
 <script>
-import OrgaPage from '@/components/OrgaPage.vue';
 import cardService from '@/services/cardService';
 import { explodeLabel } from '@/utils/labelSplitter.js';
-import NewCardModal from '@/components/NewCardModal.vue';
-import ItemButton from '@/components/inputs/ItemButton.vue';
-import IconButton from '@/components/inputs/IconButton.vue';
 import loaderMixin from '@/mixins/loaderMixin';
-import TextInput from '@/components/inputs/TextInput.vue';
 
 export default{
 
-    components: {OrgaPage, NewCardModal, ItemButton, IconButton, TextInput},
     mixins: [loaderMixin],
 
     data(){
@@ -31,7 +25,6 @@ export default{
 
             cardService.getCards()
                 .then( data =>{
-                    console.log(data)
                     this.cards = data.map(card => {
                         const { firstname, lastname } = explodeLabel(card.label);
                         return {

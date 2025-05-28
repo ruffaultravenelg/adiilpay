@@ -6,6 +6,10 @@ export default {
         visible: {
             type: Boolean,
             default: false
+        },
+        closable: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
@@ -20,6 +24,10 @@ export default {
         close(){
             this.$emit('close');
             this.showed = false;
+        },
+        backgroundClicked(){
+            if (this.closable)
+                this.close();
         }
     },
     watch: {
@@ -38,7 +46,7 @@ export default {
 
     <!-- Background -->
     <transition name="fade" appear>
-        <div v-show="showed" class="background" @click.self="close">
+        <div v-show="showed" class="background" @click.self="backgroundClicked">
         
             <!-- Modal -->
             <transition name="modal" appear>

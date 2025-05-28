@@ -12,15 +12,27 @@ export default{
             type: String,
             required: false,
             default: ''
-        }
+        },
+        to:{
+            type: Object,
+            required: false,
+            defualt: null,
+        },
     },
 }
 
 </script>
 
 <template>
-    <button class="btn btn-primary">
+
+    <RouterLink v-if="to" class="btn btn-primary" :to="to">
+        <i v-if="icon">{{ icon }}</i>
+        {{  label }}
+    </RouterLink>
+
+    <button v-else class="btn btn-primary">
         <i v-if="icon">{{ icon }}</i>
         {{ label }}
     </button>
+
 </template>

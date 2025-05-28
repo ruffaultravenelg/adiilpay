@@ -1,12 +1,8 @@
 <script>
-import ButtonPrimary from '@/components/inputs/ButtonPrimary.vue';
-import TextInput from '@/components/inputs/TextInput.vue';
-import Page from '@/components/Page.vue'
 import loaderMixin from '@/mixins/loaderMixin';
 import authService from '@/services/authService';
 
 export default{
-    components: {Page, ButtonPrimary, TextInput},
     mixins: [loaderMixin],
 
     data(){
@@ -53,12 +49,12 @@ export default{
             <section class="form">
             
                 <div class="elm">
-                    <label for="login">Identifiant</label>
+                    <label for="login" class="bold">Identifiant</label>
                     <TextInput id="login" tabindex="1" v-model="login_input" placeholder="Identifiant"/>
                 </div>
 
                 <div class="elm">
-                    <label for="password">Mot de passe</label>
+                    <label for="password" class="bold">Mot de passe</label>
                     <TextInput type="password" id="password" tabindex="2" v-model="password_input" placeholder="Mot de passe" />
                 </div>
 

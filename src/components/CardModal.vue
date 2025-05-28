@@ -1,16 +1,17 @@
 <script>
-import Modal from './Modal.vue';
-import Card from './Card.vue';
 
 export default{
     name: 'CardModal',
-    components: { Modal, Card },
     emits: ['close'],
 
     props: {
         card: {
             required: true,
         },
+        closable: {
+            type: Boolean,
+            default: true
+        }
     },
 
     methods: {
@@ -26,7 +27,7 @@ export default{
 </script>
 
 <template>
-    <Modal ref="modal" @close="$emit('close')">
+    <Modal ref="modal" @close="$emit('close')" :closable="closable">
         <Transition name="card" appear>
             <Card :card="card" class="card" v-show="$refs.modal?.showed"/>
         </Transition>

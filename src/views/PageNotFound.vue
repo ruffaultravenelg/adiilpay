@@ -1,8 +1,7 @@
 <script>
-import Page from '@/components/Page.vue';
 
 export default{
-    components: {Page},
+    
 }
 
 </script>

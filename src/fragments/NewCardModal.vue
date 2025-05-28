@@ -1,16 +1,13 @@
 <script>
 import cardService from '@/services/cardService';
-import CardModal from './CardModal.vue';
 import toastMixin from '@/mixins/toastMixin';
-import ButtonValidate from './inputs/ButtonValidate.vue';
-import ButtonCancel from './inputs/ButtonCancel.vue';
+import nfcService from '@/services/nfcService';
+import loaderMixin from '@/mixins/loaderMixin';
 
 export default{
     name: 'NewCardModal',
     emits: ['cardCreated'],
-    mixins: [toastMixin],
-
-    components: { CardModal, ButtonValidate, ButtonCancel },
+    mixins: [toastMixin, loaderMixin],
     
     data() {
         return {
@@ -38,13 +35,33 @@ export default{
         },
 
         create(){
+
+            this.showLoader();
+            setTimeout(() => {
+                this.hideLoader();
+                this.toastSuccess('Carte créée avec succès !');
+                this.close();
+
+                if (nfcService.isNFCAvailable()){
+                    //Do nfc
+                } else {
+                    this.$refs.noNfcModal.show();
+                    this.close();
+                }
+
+            }, 1000);
+
+            return;
             cardService.createCard({ label: this.tempCard.label })
-                .then(() => {
-                    this.$emit('cardCreated', this.tempCard);
+                .then( card => {
+                    this.hideLoader();
+                    this.tempCard = card;
+                    this.$emit('cardCreated', card);
                     this.toastSuccess('Carte créée avec succès !');
                     this.close();
                 })
                 .catch( e => this.toastCatch(e) );
+
         }
 
     },
@@ -60,6 +77,8 @@ export default{
 </script>
 
 <template>
+
+    <!-- MAIN CREATION MODAL -->
     <CardModal :card="tempCard" ref="modal">
         <div class="form">
             
@@ -76,6 +95,10 @@ export default{
 
         </div>
     </CardModal>
+
+    <!-- MODAL TO HANDLE NFC -->
+    <NewCardNoNFC ref="noNfcModal" :cardId="tempCard.id" />
+
 </template>
 
 <style scoped>

@@ -2,7 +2,6 @@
 export default {
 
     name: 'Page',
-    components: {},
 
     props: {
         title: {

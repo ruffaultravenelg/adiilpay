@@ -1,11 +1,9 @@
 <script>
 import orgaService from '@/services/orgaService';
-import IconButton from './inputs/IconButton.vue';
 
 export default {
 
     name: 'OrgaPage',
-    components: {IconButton},
 
     data(){
         return{
@@ -45,6 +43,7 @@ export default {
     <IconButton
         class="back-btn"
         icon="chevron_left"
+        style="z-index: 999;"
         @click="$router.go(-1)"
     />
 

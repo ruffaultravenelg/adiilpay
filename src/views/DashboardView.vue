@@ -1,14 +1,10 @@
 <script>
-import Modal from '@/components/Modal.vue'
 import dashboardService from '@/services/dashboardService'
-import OrgaPage from '@/components/OrgaPage.vue'
-import ItemButton from '@/components/inputs/ItemButton.vue'
 import toastMixin from '@/mixins/toastMixin'
 import loaderMixin from '@/mixins/loaderMixin'
 
 export default {
 
-    components: {OrgaPage, Modal, ItemButton},
     mixins: [toastMixin, loaderMixin],
 
     mounted(){
