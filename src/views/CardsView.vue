@@ -17,12 +17,11 @@ export default{
     mounted(){
         this.refreshCards();
     },
-
-    methods:{
+    
+    methods: {
 
         refreshCards(){
             this.showLoader();
-
             cardService.getCards()
                 .then( data =>{
                     this.cards = data.map(card => {

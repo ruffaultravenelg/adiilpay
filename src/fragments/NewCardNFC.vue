@@ -19,6 +19,7 @@ export default{
             trying: true,
             title: "Écriture de la carte",
             text: "Rapprochez la carte de l'arrière de votre téléphone pour l'écrire.",
+            finished: false,
         }
     },
 
@@ -26,6 +27,8 @@ export default{
         
         show(){
             this.$refs.modal.show();
+            this.trying = true;
+            this.finished = false;
             setTimeout(this.tryWrite, 700);
         },
 
@@ -39,7 +42,7 @@ export default{
             nfcService.writeNFC(this.url)
                 .then(() => {
                     this.toastSuccess('Carte écrite avec succès !');
-                    this.$refs.modal.close();
+                    this.finished = true;
                 })
                 .catch(e => {
                     this.title = "Une erreur c'est produite.";
@@ -68,12 +71,21 @@ export default{
 
 <template>
     <Modal ref="modal" :closable="false">
-      
-        <p class="title">{{ title }}</p>
-        <p class="subtitle">{{ text }}</p>
 
-        <video v-if="trying" src="@/assets/images/nfc_write.webm" autoplay muted loop playsinline></video>
-        <ButtonPrimary v-else class="wide" icon="nfc" label="Réessayer" @click="tryWrite"/>
+        <template v-if="!finished">
+            <p class="title">{{ title }}</p>
+            <p class="subtitle">{{ text }}</p>
+
+            <video v-if="trying" src="@/assets/images/nfc_write.webm" autoplay muted loop playsinline></video>
+            <ButtonPrimary v-else class="wide" icon="nfc" label="Réessayer" @click="tryWrite"/>
+        </template>
+
+        <template v-else>
+            <p class="title">Tout est bon ! </p>
+            <p class="subtitle">La carte est prête à être utilisée</p>
+
+            <ButtonPrimary class="wide" icon="check" label="Fermer" @click="close()"/>
+        </template>
 
     </Modal>
 </template>

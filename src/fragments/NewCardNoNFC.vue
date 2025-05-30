@@ -51,7 +51,7 @@ export default{
             <ButtonPrimary icon="content_copy" only-icon class="copy-btn" @click="copyCardId"/>
         </p>
 
-        <ButtonPrimary icon="home" label="Retour au dashboard" :to="{ name: 'dashboard' }" />
+        <ButtonPrimary icon="home" class="wide" label="Fermer" @click="close()" />
 
     </Modal>
 </template>
@@ -65,10 +65,14 @@ export default{
     border-radius: 10px;
     margin-bottom: 20px;
     height: calc(2 * 15px + 48px);
+    position: relative;
+    overflow: hidden;
 }
 
 .copy-btn{
-    float: right;
+    position: absolute;
+    top: 15px;
+    right: 15px;
 }
 
 </style>
