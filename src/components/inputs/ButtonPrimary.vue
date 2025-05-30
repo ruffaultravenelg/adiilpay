@@ -6,7 +6,8 @@ export default{
     props: {
         label: {
             type: String,
-            required: true,
+            required: false,
+            default: '',
         },
         icon: {
             type: String,
@@ -18,6 +19,11 @@ export default{
             required: false,
             defualt: null,
         },
+        onlyIcon: {
+            type: Boolean,
+            required: false,
+            default: false,
+        }
     },
 }
 
@@ -25,12 +31,12 @@ export default{
 
 <template>
 
-    <RouterLink v-if="to" class="btn btn-primary" :to="to">
+    <RouterLink v-if="to" class="btn btn-primary" :to="to" :class="{ 'only-icon': onlyIcon }">
         <i v-if="icon">{{ icon }}</i>
         {{  label }}
     </RouterLink>
 
-    <button v-else class="btn btn-primary">
+    <button v-else class="btn btn-primary" :class="{ 'only-icon': onlyIcon }">
         <i v-if="icon">{{ icon }}</i>
         {{ label }}
     </button>

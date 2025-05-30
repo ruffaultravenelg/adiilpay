@@ -5,7 +5,7 @@
     --color-primary-darker: color-mix(in srgb, var(--color-primary), black 20%);
     --color-primary-lighter: color-mix(in srgb, var(--color-primary), white 92%);
 
-    --color-background-one: #F8EDF6;
+    --color-background-one: var(--color-primary-lighter);
     --color-background-two: #E6EEF9;  
     
     --color-black: black;

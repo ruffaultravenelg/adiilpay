@@ -22,6 +22,14 @@ export default{
         orgaName(){
             return orgaService.getName();
         }
+    },
+
+    methods: {
+        truncate(string, maxSize){
+            if (string.length <= maxSize)
+                return string;
+            return string.slice(0, maxSize);
+        }
     }
     
 }
@@ -40,7 +48,7 @@ export default{
 
         <p class="card-sold">{{ card.balance }}&euro;</p>
 
-        <p class="card-id">{{ card.id }}</p>
+        <p class="card-id">{{ truncate(card.id, 15) }}</p>
 
         <p class="card-orga">{{ orgaName }}</p>
 

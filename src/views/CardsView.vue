@@ -60,6 +60,7 @@ export default{
 </script>
 
 <template>
+    
     <OrgaPage name="Liste des cartes" noPadding>
         
         <div class="search">

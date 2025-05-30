@@ -1,10 +1,8 @@
 <script>
-import cardService from '@/services/cardService';
 import toastMixin from '@/mixins/toastMixin';
 
 export default{
-    name: 'NewCardModal',
-    emits: ['cardCreated'],
+
     mixins: [toastMixin],
     
     props: {
@@ -24,14 +22,10 @@ export default{
             this.$refs.modal.close();
         },
 
-        create(){
-            cardService.createCard({ label: this.tempCard.label })
-                .then(() => {
-                    this.$emit('cardCreated', this.tempCard);
-                    this.toastSuccess('Carte créée avec succès !');
-                    this.close();
-                })
-                .catch( e => this.toastCatch(e) );
+        copyCardId(){
+            navigator.clipboard.writeText(this.cardId)
+                .then(() => this.toastSuccess('ID de la carte copié dans le presse-papiers !'))
+                .catch(e => this.toastCatch(e));
         }
 
     },
@@ -52,9 +46,9 @@ export default{
         <p class="title">NFC non supporté</p>
         <p class="subtitle">Modifier le contenu de la carte NFC manuellement pour y mettre l'adresse suivante :</p>
 
-        <p v-if="cardId" class="link">
+        <p v-if="cardId" class="id-link">
             {{ cardId }}
-            <i>content_copy</i>
+            <ButtonPrimary icon="content_copy" only-icon class="copy-btn" @click="copyCardId"/>
         </p>
 
         <ButtonPrimary icon="home" label="Retour au dashboard" :to="{ name: 'dashboard' }" />
@@ -64,11 +58,17 @@ export default{
 
 <style scoped>
 
-.link{
-    padding: 10px;
-    background-color: var(--color-secondary);
-    border-radius: 5px;
+.id-link{
+    padding: 15px;
+    background-color: #DDDDDD;
+    line-height: 50px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    height: calc(2 * 15px + 48px);
 }
 
+.copy-btn{
+    float: right;
+}
 
 </style>

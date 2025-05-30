@@ -12,7 +12,7 @@ export default{
     data() {
         return {
             tempCard: {
-                id: 'MFKEOSFPES',
+                id: '',
                 label: '',
                 balance: 0,
             }
@@ -23,7 +23,7 @@ export default{
         
         show(){
             this.tempCard = {
-                id: 'MFKEOSFPES',
+                id: '123e4567-e89b-12d3-a456-426614174000',
                 label: '',
                 balance: 0,
             };
@@ -36,28 +36,21 @@ export default{
 
         create(){
 
-            this.showLoader();
-            setTimeout(() => {
-                this.hideLoader();
-                this.toastSuccess('Carte créée avec succès !');
-                this.close();
-
-                if (nfcService.isNFCAvailable()){
-                    //Do nfc
-                } else {
-                    this.$refs.noNfcModal.show();
-                    this.close();
-                }
-
-            }, 1000);
-
-            return;
             cardService.createCard({ label: this.tempCard.label })
                 .then( card => {
                     this.hideLoader();
                     this.tempCard = card;
                     this.$emit('cardCreated', card);
                     this.toastSuccess('Carte créée avec succès !');
+
+                    if (nfcService.isNFCAvailable()){
+                        this.$refs.nfcModal.show();
+                        this.close();
+                    } else {
+                        this.$refs.noNfcModal.show();
+                        this.close();
+                    }
+                    
                     this.close();
                 })
                 .catch( e => this.toastCatch(e) );
@@ -98,11 +91,6 @@ export default{
 
     <!-- MODAL TO HANDLE NFC -->
     <NewCardNoNFC ref="noNfcModal" :cardId="tempCard.id" />
+    <NewCardNFC ref="nfcModal" :cardId="tempCard.id" />
 
 </template>
-
-<style scoped>
-
-
-
-</style>

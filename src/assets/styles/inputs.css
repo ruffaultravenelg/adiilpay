@@ -43,6 +43,11 @@
 .btn:focus{
     box-shadow: 0 0 0px 4px color-mix(in srgb, var(--main), transparent 50%);
 }
+.btn.only-icon{
+    padding: 15px;
+    width: 48px;
+    height: 48px;
+}
 
 .btn > i{
     font-family: 'Material Symbols Outlined';
@@ -142,6 +147,7 @@
 .btn-item.only-icon{
     padding: 0 !important;
     width: auto !important;
+    height: auto !important;
 }
 .btn-item.only-icon > i{
     background-color: transparent;
