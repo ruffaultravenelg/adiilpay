@@ -62,6 +62,10 @@ export default{
     computed: {
         canSubmit() {
             return this.tempCard.label.length > 0;
+        },
+        cardUrl() {
+            const parsedUrl = new URL(location.href);
+            return `${parsedUrl.protocol}//${parsedUrl.host}/card/${this.tempCard.id}`;
         }
     },
 
@@ -90,7 +94,7 @@ export default{
     </CardModal>
 
     <!-- MODAL TO HANDLE NFC -->
-    <NewCardNoNFC ref="noNfcModal" :cardId="tempCard.id" />
-    <NewCardNFC ref="nfcModal" :cardId="tempCard.id" />
+    <NewCardNoNFC ref="noNfcModal" :cardUrl="cardUrl" />
+    <NewCardNFC ref="nfcModal" :cardUrl="cardUrl" />
 
 </template>

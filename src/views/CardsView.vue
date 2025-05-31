@@ -16,6 +16,7 @@ export default{
 
     mounted(){
         this.refreshCards();
+        this.$refs.search.$el.focus();
     },
     
     methods: {
@@ -63,7 +64,7 @@ export default{
     <OrgaPage name="Liste des cartes" noPadding>
         
         <div class="search">
-            <TextInput placeholder="Recehrcher une carte" v-model="search" class="no-shadow"/>
+            <TextInput placeholder="Recehrcher une carte" v-model="search" class="no-shadow" ref="search"/>
         </div>
 
         <div class="card-list">

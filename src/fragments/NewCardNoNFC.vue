@@ -6,7 +6,7 @@ export default{
     mixins: [toastMixin],
     
     props: {
-        cardId: {
+        cardUrl: {
             type: String,
             default: null,
         },
@@ -23,7 +23,7 @@ export default{
         },
 
         copyCardId(){
-            navigator.clipboard.writeText(this.cardId)
+            navigator.clipboard.writeText(this.cardUrl)
                 .then(() => this.toastSuccess('ID de la carte copié dans le presse-papiers !'))
                 .catch(e => this.toastCatch(e));
         }
@@ -45,9 +45,8 @@ export default{
       
         <p class="title">NFC non supporté</p>
         <p class="subtitle">Modifier le contenu de la carte NFC manuellement pour y mettre l'adresse suivante :</p>
-
-        <p v-if="cardId" class="id-link">
-            {{ cardId }}
+        <p v-if="cardUrl" class="id-link">
+            {{ cardUrl }}
             <ButtonPrimary icon="content_copy" only-icon class="copy-btn" @click="copyCardId"/>
         </p>
 

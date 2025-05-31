@@ -8,40 +8,6 @@ export default {
 
     mixins: [toastMixin, loaderMixin],
 
-    data() {
-        return {
-            card: null,
-        }
-    },
-
-    mounted() {
-
-        this.showLoader();
-        cardService.getCard(this.cardId)
-            .then( card => {
-                this.card = card 
-                this.$refs.modal.show();
-            })
-            .catch( e => this.toastCatch(e) )
-            .finally( () => this.hideLoader() );
-        
-    },
-
-    methods: {
-        deleteCard(){
-            this.showLoader();
-            cardService.nukeCard(this.card.id)
-                .then(() => {
-                    this.$router.push({ name: 'cards' });
-                    this.toastSuccess('Carte supprimée avec succès !');
-                })
-                .catch( e => this.toastCatch(e) )
-                .finally( () => this.hideLoader() );
-
-
-        },
-    },
-
     computed: {
         cardId(){
             return this.$route.params.id;
@@ -52,7 +18,91 @@ export default {
         lastname(){
             return this.card ? explodeLabel(this.card.label).lastname : '';
         },
-    }
+    },
+
+    data() {
+        return {
+            card: null,
+
+            addDepense_value: 0,
+            creditCard_value: 0,
+        }
+    },
+
+    mounted() {
+        this.refreshCard()
+            .then( this.$refs.modal.show )
+    },
+
+    methods: {
+
+        refreshCard(){
+            this.showLoader();
+            return cardService.getCard(this.cardId)
+                .then( card => this.card = card )
+                .catch( e => this.toastCatch(e) )
+                .finally( this.hideLoader );
+        },
+
+        deleteCard(){
+            this.showLoader();
+            cardService.nukeCard(this.card.id)
+                .then(() => {
+                    this.$router.push({ name: 'cards' });
+                    this.toastSuccess('Carte supprimée avec succès !');
+                })
+                .catch( e => this.toastCatch(e) )
+                .finally( () => this.hideLoader() );
+        
+        },
+
+        closePage(){
+            if (window.history.length > 1) {
+                this.$router.go(-1);
+            } else {
+                this.$router.push({ name: 'cards' });
+            }
+        },
+  
+        showAddDepense(){
+            this.addDepense_value = null;
+            this.$refs.addDepenseModal.show();
+            this.$nextTick( () => {
+                this.$refs.addDepenseInput.$el.focus();
+            } );
+        },
+
+        addDepense(){
+            this.showLoader();
+            cardService.addDepense(this.card.id, this.addDepense_value)
+                .then( () => {
+                    this.toastSuccess('Dépense ajoutée avec succès !');
+                    this.refreshCard();
+                })
+                .catch( e => this.toastCatch(e) )
+                .finally( this.hideLoader );
+        },
+
+        showCreditCard(){
+            this.creditCard_value = null;
+            this.$refs.creditCardModal.show();
+            this.$nextTick( () => {
+                this.$refs.creditCardInput.$el.focus();
+            });
+        },
+
+        creditCard(){
+            this.showLoader();
+            cardService.creditCard(this.card.id, this.creditCard_value)
+                .then( () => {
+                    this.toastSuccess('Carte créditée avec succès !');
+                    this.refreshCard();
+                })
+                .catch( e => this.toastCatch(e) )
+                .finally( this.hideLoader );
+        },
+
+    },
 
 }
 
@@ -60,24 +110,47 @@ export default {
 
 <template>
 
+    <!-- MAIN PAGE BACKGROUND -->
     <OrgaPage :name="firstname">
     </OrgaPage>
 
+    <!-- MAIN PAGE CONTENT -->
     <CardModal
         ref="modal"
         :card="card"
-        @close="$router.go(-1)"
+        @close="closePage()"
     >
         <div class="btn-container">
-            <ItemButton tabindex="1" label="Ajouter une dépense" icon="add" :to="{ name: 'dashboard' }" />
-            <ItemButton tabindex="2" label="Créditer le compte" icon="savings" :to="{ name: 'dashboard' }" />
+            <ItemButton tabindex="1" label="Ajouter une dépense" icon="add" @click="showAddDepense()" />
+            <ItemButton tabindex="2" label="Créditer le compte" icon="savings" @click="showCreditCard()" />
             <ItemButton tabindex="2" label="Voir toutes les transactions" icon="receipt_long" :to="{ name: 'dashboard' }" />
             <ItemButton tabindex="2" label="Réatribuer la carte" icon="recycling" :to="{ name: 'dashboard' }" />
             <ItemButton tabindex="2" label="Désactiver la carte" icon="link_off" @click="$refs.deleteModal.show()" />
         </div>
     </CardModal>
 
+    <!-- VALIDATE SUPPRESSION -->
     <ValidateModal ref="deleteModal" @validated="deleteCard"/>
+
+    <!-- ADD DEPENSE MODAL -->
+    <ValidateModal
+        ref="addDepenseModal"
+        title="Ajouter une dépense"
+        details="Spécifier le montant à retirer de la carte"
+        @validated="addDepense()"
+    >
+        <TextInput type="number" placeholder="1,25" v-model="addDepense_value" ref="addDepenseInput" min="0" />
+    </ValidateModal>
+    
+    <!-- CREDIT CARD MODAL -->
+    <ValidateModal
+        ref="creditCardModal"
+        title="Créditer la carte"
+        details="Spécifier le montant à créditer sur la carte"
+        @validated="creditCard()"
+    >
+        <TextInput type="number" placeholder="5" v-model="creditCard_value" ref="creditCardInput" min="0" />
+    </ValidateModal>
 
 </template>
 

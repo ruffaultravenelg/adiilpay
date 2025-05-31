@@ -8,7 +8,7 @@ export default{
     mixins: [toastMixin, loaderMixin],
     
     props: {
-        cardId: {
+        cardUrl: {
             type: String,
             default: null,
         },
@@ -39,7 +39,7 @@ export default{
         tryWrite(){
             this.trying = true;
             this.showLoader();
-            nfcService.writeNFC(this.url)
+            nfcService.writeNFC(this.cardUrl)
                 .then(() => {
                     this.toastSuccess('Carte écrite avec succès !');
                     this.finished = true;
@@ -60,9 +60,6 @@ export default{
         canSubmit() {
             return this.tempCard.label.length > 0;
         },
-        url(){
-            return `https://pay.gemino.dev/card?id=${this.cardId}`;
-        }
     },
 
 }

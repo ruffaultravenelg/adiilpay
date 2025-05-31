@@ -1,11 +1,14 @@
 <script>
-
-export default{
+export default {
     name: 'TextInput',
     emits: ['update:modelValue'],
     inheritAttrs: false,
 
     props: {
+        modelValue: {
+            type: [String, Number],
+            default: ''
+        },
         placeholder: {
             type: String,
             required: false,
@@ -15,44 +18,40 @@ export default{
             type: String,
             required: false,
             default: null,
+        },
+        type: {
+            type: String,
+            required: false,
+            default: 'text',
+        },
+    },
+    methods: {
+        onInput(event) {
+            this.$emit('update:modelValue', event.target.value);
         }
-    },
-
-    data(){
-        return {
-            modelValue: '',
-        };
-    },
-
-    watch: {
-        modelValue(){
-            this.$emit('update:modelValue', this.modelValue);
-        }
-    },
-
+    }
 }
-
 </script>
 
 <template>
-
     <div v-if="label" class="elm">
         <label for="card_label">{{ label }}</label>
-        <input type="text"
+        <input
+            :type="type"
             :placeholder="placeholder"
-            v-model="modelValue"
-            v-bind="$attrs"
             :class="['input wide', $attrs.class]"
+            :value="modelValue"
+            @input="onInput"
+            v-bind="$attrs"
         />
     </div>
 
     <input v-else
-        type="text"
+        :type="type"
         :placeholder="placeholder"
-        v-model="modelValue"
-        v-bind="$attrs"
         :class="['input wide', $attrs.class]"
+        :value="modelValue"
+        @input="onInput"
+        v-bind="$attrs"
     />
-
-
 </template>

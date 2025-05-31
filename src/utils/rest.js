@@ -40,7 +40,19 @@ async function call(method, endpoint, data = undefined, bearer = true) {
 
         if (!res.ok) {
             // throw structured error
-            const message = result ? (result.details ? result.details[0] : result.message) : 'Une erreur est survenue';
+            let message = 'Une erreur est survenue';
+            if (result){
+
+                if (result.details){
+                    message = result.details[0];
+                } else if (result.message){
+                    message = result.message;
+                } else if (result.error){
+                    message = result.error;
+                }
+
+            }
+
             throw {
                 status: res.status,
                 message: message,

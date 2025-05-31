@@ -13,10 +13,25 @@ export default {
     nukeCard(id){
         return DELETE(`/cards/${id}/nuke`);
     },
-    
 
     createCard(card){
         return POST('/cards', card);
+    },
+
+    addDepense(cardId, amount, description = 'Achat'){
+        return POST(`/card/${cardId}/transaction`, {
+            amount: -amount,
+            description,
+            type: 'PAYMENT'
+        });
+    },
+
+    creditCard(cardId, amount, description = 'Crédit'){
+        return POST(`/card/${cardId}/transaction`, {
+            amount: +amount,
+            description,
+            type: 'DEPOSIT'
+        });
     },
 
 }

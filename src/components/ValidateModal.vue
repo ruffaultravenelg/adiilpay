@@ -25,7 +25,12 @@ export default{
             type: String,
             required: false,
             default: 'Confirmer'
-        }
+        },
+        focusRef: {
+            type: String,
+            required: false,
+            default: null
+        },
     },
 
     data(){
@@ -38,6 +43,15 @@ export default{
         show(data) {
             this.hermes = data;
             this.$refs.modal.show();
+            if (this.focusRef) {
+                this.$nextTick(() => {
+                    console.log(this.focusRef)
+                    const focusElement = this.$refs[this.focusRef];
+                    if (focusElement && focusElement.$el) {
+                        focusElement.$el.focus();
+                    }
+                });
+            }
         },
 
         close() {
@@ -58,9 +72,16 @@ export default{
     <Modal ref="modal">
         <p class="title">{{ title }}</p>
         <p class="subtitle">{{ details }}</p>
+        <slot></slot>
         <div class="btns">
             <ButtonCancel :label="cancel" icon="close" @click="close" />
             <ButtonValidate :label="validate" icon="check" @click="validateClicked" />
         </div>
     </Modal>
 </template>
+
+<style scoped>
+.btns{
+    margin-top: 20px;
+}
+</style>
