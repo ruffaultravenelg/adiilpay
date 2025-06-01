@@ -19,7 +19,7 @@ export default {
     },
 
     addDepense(cardId, amount, description = 'Achat'){
-        return POST(`/card/${cardId}/transaction`, {
+        return POST(`/card/${cardId}/transactions`, {
             amount: -amount,
             description,
             type: 'PAYMENT'
@@ -27,7 +27,7 @@ export default {
     },
 
     creditCard(cardId, amount, description = 'Crédit'){
-        return POST(`/card/${cardId}/transaction`, {
+        return POST(`/card/${cardId}/transactions`, {
             amount: +amount,
             description,
             type: 'DEPOSIT'

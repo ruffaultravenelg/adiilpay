@@ -10,7 +10,11 @@ export default {
         closable: {
             type: Boolean,
             default: true
-        }
+        },
+        noPadding: {
+            type: Boolean,
+            default: false
+        },
     },
     data() {
         return {
@@ -20,6 +24,9 @@ export default {
     methods: {
         show(){
             this.showed = true;
+            this.$nextTick(() => {
+                this.$refs.modal_content.focus();
+            });
         },
         close(){
             this.$emit('close');
@@ -50,14 +57,13 @@ export default {
         
             <!-- Modal -->
             <transition name="modal" appear>
-                <div v-show="showed" class="modal-container">
+                <div v-show="showed" class="modal-container" ref="modal_content">
                     <slot></slot>
                 </div>
             </transition>
     
         </div>
     </transition>
-  
 
 </template>
 
@@ -95,9 +101,10 @@ export default {
     z-index: 101;
     bottom: 0;
     background-color: var(--color-white);
-    padding: 30px;
+    padding: v-bind('noPadding ? "0" : "30px"');
     width: 100%;
     max-width: var(--max-width);
+    max-height: 90dvh;
     border-radius: 30px 30px 0 0;
     box-shadow: var(--shadow);
 }

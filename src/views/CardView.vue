@@ -67,9 +67,6 @@ export default {
         showAddDepense(){
             this.addDepense_value = null;
             this.$refs.addDepenseModal.show();
-            this.$nextTick( () => {
-                this.$refs.addDepenseInput.$el.focus();
-            } );
         },
 
         addDepense(){
@@ -86,9 +83,6 @@ export default {
         showCreditCard(){
             this.creditCard_value = null;
             this.$refs.creditCardModal.show();
-            this.$nextTick( () => {
-                this.$refs.creditCardInput.$el.focus();
-            });
         },
 
         creditCard(){
@@ -139,7 +133,7 @@ export default {
         details="Spécifier le montant à retirer de la carte"
         @validated="addDepense()"
     >
-        <TextInput type="number" placeholder="1,25" v-model="addDepense_value" ref="addDepenseInput" min="0" />
+        <TextInput type="number" placeholder="1,25" v-model="addDepense_value" min="0" tabindex="1" />
     </ValidateModal>
     
     <!-- CREDIT CARD MODAL -->
@@ -149,7 +143,7 @@ export default {
         details="Spécifier le montant à créditer sur la carte"
         @validated="creditCard()"
     >
-        <TextInput type="number" placeholder="5" v-model="creditCard_value" ref="creditCardInput" min="0" />
+        <TextInput type="number" placeholder="5" v-model="creditCard_value" min="0" tabindex="1" />
     </ValidateModal>
 
 </template>

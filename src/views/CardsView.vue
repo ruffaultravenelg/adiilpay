@@ -16,7 +16,6 @@ export default{
 
     mounted(){
         this.refreshCards();
-        this.$refs.search.$el.focus();
     },
     
     methods: {
@@ -64,22 +63,23 @@ export default{
     <OrgaPage name="Liste des cartes" noPadding>
         
         <div class="search">
-            <TextInput placeholder="Recehrcher une carte" v-model="search" class="no-shadow" ref="search"/>
+            <TextInput placeholder="Recehrcher une carte" v-model="search" class="no-shadow" tabindex="1"/>
         </div>
 
         <div class="card-list">
             <ItemButton
-                v-for="card in filteredCards"
+                v-for="(card, index) in filteredCards"
                 :key="card.id"
                 :to="{ name: 'card', params: { id: card.id } }"
                 :label="card.firstname"
                 :span="card.lastname"
+                :tabindex="index + 3"
             />
         </div>
 
     </OrgaPage>
 
-    <IconButton icon="add" class="new-btn" @click="newCard()" />
+    <IconButton icon="add" class="new-btn" @click="newCard()" tabindex="2" />
 
     <NewCardModal ref="newCardModal" @cardCreated="refreshCards" />
 
@@ -99,7 +99,7 @@ export default{
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
-    padding: var(--padding) var(--padding) calc(var(--padding) * 3) var(--padding);
+    padding: calc(var(--padding) / 2) var(--padding) calc(var(--padding) * 3) var(--padding);
     overflow-y: auto;
     scrollbar-width: none;
 }

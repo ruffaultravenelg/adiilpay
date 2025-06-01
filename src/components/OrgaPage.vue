@@ -31,8 +31,8 @@ export default {
 
     <div class="container">
 
-        <p class="title">{{ orgaName }}</p>
-        <h1 class="subtitle">{{ name }}</h1>
+        <p class="page-title">{{ orgaName }}</p>
+        <h1 class="page-subtitle">{{ name }}</h1>
 
         <div :class="'page' + (noPadding ? ' no-padding' : '')">
             <slot></slot>
@@ -59,7 +59,7 @@ export default {
     flex-direction: column;
 }
 
-.title{
+.page-title{
     font-size: 1.5rem;
     font-weight: bold;
     color: var(--color-black);
@@ -68,13 +68,13 @@ export default {
     padding: var(--padding) var(--padding) 0 var(--padding);
 }
 
-.subtitle{
+.page-subtitle{
     font-size: 1.2rem;
     font-weight: normal;
     color: var(--color-black);
     width: 100%;
     text-align: center;
-    padding: 0 var(--padding) calc(var(--padding) - 5px) var(--padding);
+    padding: 0 var(--padding) calc(var(--padding) / 2 - 5px) var(--padding);
 }
 
 .page{
@@ -94,6 +94,12 @@ export default {
     position: fixed;
     top: var(--padding);
     left: var(--padding);
+}
+
+@media (max-width: 600px) {
+    .back-btn{
+        display: none;
+    }
 }
 
 </style>

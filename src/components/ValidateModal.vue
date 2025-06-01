@@ -26,11 +26,6 @@ export default{
             required: false,
             default: 'Confirmer'
         },
-        focusRef: {
-            type: String,
-            required: false,
-            default: null
-        },
     },
 
     data(){
@@ -43,15 +38,6 @@ export default{
         show(data) {
             this.hermes = data;
             this.$refs.modal.show();
-            if (this.focusRef) {
-                this.$nextTick(() => {
-                    console.log(this.focusRef)
-                    const focusElement = this.$refs[this.focusRef];
-                    if (focusElement && focusElement.$el) {
-                        focusElement.$el.focus();
-                    }
-                });
-            }
         },
 
         close() {

@@ -27,12 +27,14 @@ export default{
 </script>
 
 <template>
-    <Modal ref="modal" @close="$emit('close')" :closable="closable">
+    <Modal ref="modal" @close="$emit('close')" :closable="closable"  noPadding>
         <Transition name="card" appear>
             <Card :card="card" class="card" v-show="$refs.modal?.showed"/>
         </Transition>
         <div class="spacer"></div>
-        <slot></slot>
+        <div class="content-container">
+            <slot></slot>
+        </div>
     </Modal>
 </template>
 
@@ -58,6 +60,13 @@ export default{
 }
 .card-enter-to, .card-leave-from {
     transform: translate(-50%, 0);
+}
+
+.content-container {
+    width: 100%;
+    max-height: calc(90dvh - 200px);
+    overflow-y: auto;
+    padding: 30px;
 }
 
 </style>

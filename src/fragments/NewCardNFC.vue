@@ -41,6 +41,8 @@ export default{
             this.showLoader();
             nfcService.writeNFC(this.cardUrl)
                 .then(() => {
+                    nfcService.readNFC()
+                        .then( r => console.log(r) );
                     this.toastSuccess('Carte écrite avec succès !');
                     this.finished = true;
                 })
